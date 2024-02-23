@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8284931108685045249}
   - component: {fileID: 8284931108685045248}
   - component: {fileID: 8284931108685045251}
+  - component: {fileID: 7180390740797489573}
   m_Layer: 0
   m_Name: Test Spell Pickup
   m_TagString: Spell Pickup
@@ -97,3 +98,15 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7180390740797489573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8284931108685045250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ed965274b93f5847bb1ca8b2dd4a1cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

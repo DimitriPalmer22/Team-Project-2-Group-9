@@ -31,17 +31,30 @@ public class SpellCastScript : MonoBehaviour
     /// </summary>
     private bool _isSpellActive;
     
+    // A SpellPickupScript object that the player is looking at 
+    private SpellPickupScript _spellPickupScript;
+    
+    // The camera
+    private Camera _camera;
+    
     #endregion fields
     
     #region Keys
     
-    private const KeyCode CastSpellKey = KeyCode.E;
+    // The key to cast the spell
+    private const KeyCode CastSpellKey = KeyCode.F;
+
+    // The key to pick up a spell
+    private const KeyCode PickupSpellKey = KeyCode.E;
     
     #endregion Keys
     
     // Start is called before the first frame update
     void Start()
     {
+        // Set the camera to the main camera
+        _camera = Camera.main;
+        
         // Pick up a freeze spell by default
         // ! TODO: Delete later
         PickUpSpell(SpellCastType.Freeze);
@@ -75,6 +88,14 @@ public class SpellCastScript : MonoBehaviour
         // If the player presses the spell cast button, cast the spell
         if (Input.GetKeyDown(CastSpellKey))
             CastSpell();
+        
+        // Determine which spell the player is looking at
+        DetermineLookedAtSpell();
+        
+        // If the player presses the spell pickup button, pick up the spell
+        if (Input.GetKeyDown(PickupSpellKey) && _spellPickupScript != null)
+            _spellPickupScript.PickUpSpell(this);
+        
     }
     
     /// <summary>
@@ -147,6 +168,32 @@ public class SpellCastScript : MonoBehaviour
         
         // set the spell to inactive
         _isSpellActive = false;
+    }
+
+
+    /// <summary>
+    /// Determine which spell the player is looking at
+    /// </summary>
+    private void DetermineLookedAtSpell()
+    {
+        // Get the camera's transform
+        var cameraTransform = _camera.transform;
+        
+        // RayCast to determine if the player is looking at a GameObject tagged "Spell Pickup"
+        var hitAGameObject = Physics.Raycast(
+            cameraTransform.position, 
+            cameraTransform.forward, out var hit, 10);
+
+        // If the player is not looking at a GameObject, return
+        if (!hitAGameObject) 
+            return;
+
+        // If the player is not looking at a spell, return
+        if (!hit.collider.CompareTag("Spell Pickup")) 
+            return;
+        
+        // Set the _spellPickupScript to the SpellPickupScript of the object the player is looking at
+        _spellPickupScript = hit.collider.GetComponent<SpellPickupScript>();
     }
     
     public void PickUpSpell(SpellCastType spellType)

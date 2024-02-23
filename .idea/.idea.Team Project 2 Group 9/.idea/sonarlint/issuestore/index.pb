@@ -5,3 +5,5 @@ Q
 !Assets/Scripts/SpellCastScript.cs,c\a\ca3ff5ec020b75755d9d3aa8521b9d472261276c
 O
 Assets/Scripts/SpellCastType.cs,4\d\4d38cf2fa592494ee50c3226b1f078372a65ba12
+S
+#Assets/Scripts/SpellPickupScript.cs,9\1\914a10b36cb7859d02dfe2823c89e4405a5b3071

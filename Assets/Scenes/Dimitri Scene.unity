@@ -551,6 +551,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7180390740797489573, guid: 6989ef407a9543d45bd1bc1b8a5d114f, type: 3}
+      propertyPath: spellType
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8284931108685045250, guid: 6989ef407a9543d45bd1bc1b8a5d114f, type: 3}
       propertyPath: m_Name
       value: Test Spell Pickup

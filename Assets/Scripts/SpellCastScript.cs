@@ -142,7 +142,7 @@ public class SpellCastScript : MonoBehaviour
     }
 
     /// <summary>
-    /// Deactivate the current spell if it has a duration
+    /// Deactivate the current spell
     /// </summary>
     private void DeactivateSpell()
     {

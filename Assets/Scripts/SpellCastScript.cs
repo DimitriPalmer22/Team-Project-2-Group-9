@@ -25,6 +25,11 @@ public class SpellCastScript : MonoBehaviour
     /// How much longer the spell's effect will last
     /// </summary>
     private float _spellEffectRemaining;
+
+    /// <summary>
+    /// Boolean to determine if the spell is currently active
+    /// </summary>
+    private bool _isSpellActive;
     
     #endregion fields
     
@@ -37,7 +42,9 @@ public class SpellCastScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        // Pick up a freeze spell by default
+        // ! TODO: Delete later
+        PickUpSpell(SpellCastType.Freeze);
     }
 
     // Update is called once per frame
@@ -46,9 +53,18 @@ public class SpellCastScript : MonoBehaviour
         // Read the player's input
         UpdateInput();
         
-        // Tick the spell duration if the current spell type requires it
-        if (_spellType.IsDurationSpellType())
+        // Tick down the spell duration if the spell is active
+        if (_isSpellActive)
+        {
             _spellEffectRemaining -= Time.deltaTime;
+            
+            // if the spell's effect has expired, deactivate the spell
+            if (_spellEffectRemaining <= 0)
+                DeactivateSpell();
+            
+            // Debug Log the remaining duration of the spell
+            Debug.Log($"Spell effect remaining: {_spellEffectRemaining}");
+        }
     }
 
     /// <summary>
@@ -98,12 +114,46 @@ public class SpellCastScript : MonoBehaviour
         // Decrement the remaining uses of this spell
         _remainingUses -= 1;
         
-        // Debug Log to show the player which spell they cast
-        Debug.Log($"Casting spell: {_spellType}");
+        // Set the spell to active
+        _isSpellActive = true;
+        
+        // Debug Log the current spell type and the remaining number of uses
+        Debug.Log($"Casting spell: {_spellType}. Remaining uses: {_remainingUses}");
     }
 
+    /// <summary>
+    /// Deactivate the current spell if it has a duration
+    /// </summary>
+    private void DeactivateSpell()
+    {
+        // Set the remaining spell duration to 0
+        _spellEffectRemaining = 0;
+        
+        // Different effects depending on the current spell type
+        switch (_spellType)
+        {
+            // Invisibility spell
+            case SpellCastType.Invisibility:
+                // Remove the invisibility effect
+                break;
+            
+            // Teleport spell
+            case SpellCastType.Teleport:
+                break;
+            
+            default:
+                break;
+        }
+        
+        // set the spell to inactive
+        _isSpellActive = false;
+    }
+    
     public void PickUpSpell(SpellCastType spellType)
     {
+        // Set the current spell type to the one the player picked up
+        _spellType = spellType;
+        
         // Reset the number of spells remaining and the effect duration.
         // Then, update those values, if necessary, within the switch statement.
         // ! NOTE: This WILL DISABLE any active spells
@@ -137,6 +187,9 @@ public class SpellCastScript : MonoBehaviour
             default:
                 throw new ArgumentOutOfRangeException(nameof(spellType), spellType, null);
         }
+        
+        // Debug Log the current spell type and the remaining number of uses
+        Debug.Log($"Picked up spell: {spellType}. Remaining uses: {_remainingUses}");
     }
     
 }

@@ -1,0 +1,6 @@
+
+„csharpsquid:S3928_"[Use a constructor overloads that allows a more meaningful exception message to be provided.(«èñıÿÿÿÿ8¡ô§œİ1
+Wcsharpsquid:S3903
+".Move 'SpellCastScript' into a named namespace.(Š‘‡µûÿÿÿÿ8•á­˜İ1
+¢csharpsquid:S1186&"yAdd a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.(ûàîºûÿÿÿÿ8˜á­˜İ1
+[csharpsquid:S3459"7Remove unassigned field '_spellType', or set its value.(ÃñÜğ8ä×Ê˜İ1

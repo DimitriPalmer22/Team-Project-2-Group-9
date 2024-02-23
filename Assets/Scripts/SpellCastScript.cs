@@ -81,8 +81,9 @@ public class SpellCastScript : MonoBehaviour
             if (_spellEffectRemaining <= 0)
                 DeactivateSpell();
             
-            // Debug Log the remaining duration of the spell
-            Debug.Log($"Spell effect remaining: {_spellEffectRemaining}");
+            // if the spell is a duration spell, Debug Log the remaining duration of the spell
+            if (_spellType.IsDurationSpellType())
+                Debug.Log($"Spell effect remaining: {_spellEffectRemaining}");
         }
     }
 
@@ -101,6 +102,11 @@ public class SpellCastScript : MonoBehaviour
         // If the player presses the spell pickup button, pick up the spell
         if (Input.GetKeyDown(PickupSpellKey) && _spellPickupScript != null)
             _spellPickupScript.PickUpSpell(this);
+        
+        // If the player presses L, pick up a freeze spell
+        if (Input.GetKeyDown(KeyCode.L))
+            PickUpSpell(SpellCastType.Freeze);
+        
     }
     
     /// <summary>
@@ -122,6 +128,12 @@ public class SpellCastScript : MonoBehaviour
             // Freeze spell
             case SpellCastType.Freeze:
                 // Apply the freeze effect
+                
+                // Get the enemy controller
+                EnemyController enemyController = GameObject.FindWithTag("Enemy").GetComponent<EnemyController>();
+
+                // Freeze the enemy 
+                StartCoroutine(FreezeEnemy(enemyController));
                 break;
             
             // Invisibility spell
@@ -160,7 +172,7 @@ public class SpellCastScript : MonoBehaviour
         {
             // Invisibility spell
             case SpellCastType.Invisibility:
-                // Remove the invisibility effect
+                // TODO: Remove the invisibility effect
                 break;
             
             // Teleport spell
@@ -249,6 +261,28 @@ public class SpellCastScript : MonoBehaviour
         
         // Debug Log the current spell type and the remaining number of uses
         Debug.Log($"Picked up spell: {spellType}. Remaining uses: {_remainingUses}");
+    }
+    
+    private IEnumerator FreezeEnemy(EnemyController enemyController)
+    {
+        // if enemyController is null, return
+        if (enemyController == null)
+            yield break;
+        
+        // Debug Log that the enemy is frozen
+        Debug.Log("Freezing the enemy");
+        
+        // Freeze the enemy
+        enemyController.SetFrozen(true);
+        
+        // Wait 3 seconds
+        yield return new WaitForSeconds(3);
+        
+        // Unfreeze the enemy
+        enemyController.SetFrozen(false);
+        
+        // Debug Log that the enemy is unfrozen
+        Debug.Log("Unfreezing the enemy");
     }
     
 }

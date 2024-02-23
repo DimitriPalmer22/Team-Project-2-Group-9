@@ -26,6 +26,10 @@ public class EnemyController : MonoBehaviour
     /// </summary>
     [SerializeField] private float visionRange = 10f;
 
+    /// <summary>
+    /// Is the enemy frozen by the player's spell?
+    /// </summary>
+    private bool _isFrozen;
     
     #endregion Fields
     
@@ -38,6 +42,10 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // If the enemy is frozen, return
+        if (_isFrozen)
+            return;
+        
         // Determine the target player
         DetermineTarget();
         
@@ -122,9 +130,12 @@ public class EnemyController : MonoBehaviour
         }
 
         // Debug log the current target player
-        Debug.Log($"Target player: ({_targetPlayer}) ({_timeSincePlayerLastSeen} seconds since last seen).");
+        // Debug.Log($"Target player: ({_targetPlayer}) ({_timeSincePlayerLastSeen} seconds since last seen).");
     }
 
+    /// <summary>
+    /// Look at the target player
+    /// </summary>
     private void LookTowardTarget()
     {
         // If the target player is null, return
@@ -139,4 +150,12 @@ public class EnemyController : MonoBehaviour
         transform.LookAt(_targetPlayer.transform);
     }
     
+    /// <summary>
+    /// Set the enemy to frozen or unfrozen
+    /// </summary>
+    /// <param name="isFrozen"></param>
+    public void SetFrozen(bool isFrozen)
+    {
+        _isFrozen = isFrozen;
+    }
 }

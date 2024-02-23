@@ -39,6 +39,12 @@ public class SpellCastScript : MonoBehaviour
     
     #endregion fields
     
+    #region Properties
+    
+    public bool IsInvisible => _spellType == SpellCastType.Invisibility && _isSpellActive;
+    
+    #endregion Properties
+    
     #region Keys
     
     // The key to cast the spell

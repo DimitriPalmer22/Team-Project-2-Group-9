@@ -7,3 +7,5 @@ O
 Assets/Scripts/SpellCastType.cs,4\d\4d38cf2fa592494ee50c3226b1f078372a65ba12
 S
 #Assets/Scripts/SpellPickupScript.cs,9\1\914a10b36cb7859d02dfe2823c89e4405a5b3071
+Q
+!Assets/Scripts/EnemyController.cs,6\c\6c715b6de3e5b59d312d0741b401cfcecbe4d859

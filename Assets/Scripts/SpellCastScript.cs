@@ -56,7 +56,7 @@ public class SpellCastScript : MonoBehaviour
         _camera = Camera.main;
         
         // Pick up a freeze spell by default
-        // ! TODO: Delete later
+        // ! TODO: Change to None when the game is ready to be played
         PickUpSpell(SpellCastType.Freeze);
     }
 
@@ -95,7 +95,6 @@ public class SpellCastScript : MonoBehaviour
         // If the player presses the spell pickup button, pick up the spell
         if (Input.GetKeyDown(PickupSpellKey) && _spellPickupScript != null)
             _spellPickupScript.PickUpSpell(this);
-        
     }
     
     /// <summary>
@@ -176,6 +175,9 @@ public class SpellCastScript : MonoBehaviour
     /// </summary>
     private void DetermineLookedAtSpell()
     {
+        // Reset the spell pickup script
+        _spellPickupScript = null;
+        
         // Get the camera's transform
         var cameraTransform = _camera.transform;
         
@@ -196,6 +198,10 @@ public class SpellCastScript : MonoBehaviour
         _spellPickupScript = hit.collider.GetComponent<SpellPickupScript>();
     }
     
+    /// <summary>
+    /// Set the player's spell type & set their spell-related fields
+    /// </summary>
+    /// <param name="spellType"></param>
     public void PickUpSpell(SpellCastType spellType)
     {
         // Set the current spell type to the one the player picked up
@@ -232,7 +238,7 @@ public class SpellCastScript : MonoBehaviour
                 break;
             
             default:
-                throw new ArgumentOutOfRangeException(nameof(spellType), spellType, null);
+                break;
         }
         
         // Debug Log the current spell type and the remaining number of uses

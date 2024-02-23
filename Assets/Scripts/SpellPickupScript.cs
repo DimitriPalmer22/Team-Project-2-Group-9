@@ -18,21 +18,6 @@ public class SpellPickupScript : MonoBehaviour
     // Property for the _spellType field
     public SpellCastType SpellType => spellType;
 
-    #region Unity Methods
-
-    // private void OnTriggerEnter(Collider other)
-    // {
-    //     if (other.CompareTag("Player"))
-    //     {
-    //         // Pick up the spell
-    //         PickUpSpell(_spellType);
-    //         // Destroy the spell object
-    //         Destroy(gameObject);
-    //     }
-    // }
-
-    #endregion Unity Methods
-
     #region Methods
 
     /// <summary>

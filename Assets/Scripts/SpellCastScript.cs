@@ -9,7 +9,12 @@ using UnityEngine;
 /// </summary>
 public class SpellCastScript : MonoBehaviour
 {
-    #region fields
+    /// <summary>
+    /// How long the freeze spell will last
+    /// </summary>
+    private const float FreezeDuration = 3;
+    
+    #region Fields
     
     /// <summary>
     /// which spell the player is currently using
@@ -37,7 +42,7 @@ public class SpellCastScript : MonoBehaviour
     // The camera
     private Camera _camera;
     
-    #endregion fields
+    #endregion Fields
     
     #region Properties
     
@@ -263,6 +268,11 @@ public class SpellCastScript : MonoBehaviour
         Debug.Log($"Picked up spell: {spellType}. Remaining uses: {_remainingUses}");
     }
     
+    /// <summary>
+    /// Freeze the enemy for several seconds
+    /// </summary>
+    /// <param name="enemyController"></param>
+    /// <returns></returns>
     private IEnumerator FreezeEnemy(EnemyController enemyController)
     {
         // if enemyController is null, return
@@ -276,7 +286,7 @@ public class SpellCastScript : MonoBehaviour
         enemyController.SetFrozen(true);
         
         // Wait 3 seconds
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(FreezeDuration);
         
         // Unfreeze the enemy
         enemyController.SetFrozen(false);

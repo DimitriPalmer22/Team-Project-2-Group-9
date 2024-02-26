@@ -37,6 +37,9 @@ public class WinObjectScript : MonoBehaviour
         
         // Win the game
         GlobalScript.Instance.WinGame();
+        
+        // Destroy the win object
+        Destroy(gameObject);
     }
     
     #endregion Methods

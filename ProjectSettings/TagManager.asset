@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Spell Pickup
   - Enemy
+  - Win Object
   layers:
   - Default
   - TransparentFX

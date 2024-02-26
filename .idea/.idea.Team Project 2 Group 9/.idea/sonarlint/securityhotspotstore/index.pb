@@ -13,3 +13,5 @@ N
 Assets/Scripts/GlobalScript.cs,5\1\51469e614e3f258ce097f5eb06c853a25ee2857a
 Q
 !Assets/Scripts/WinObjectScript.cs,6\0\60082ce834c87470870df183b91e803539092d74
+Z
+*Assets/Scripts/WinObjectCollectorScript.cs,8\4\847c75ae610abb52dc7e931ea95c63be017ecbd2

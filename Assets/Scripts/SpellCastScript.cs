@@ -56,7 +56,7 @@ public class SpellCastScript : MonoBehaviour
     private const KeyCode CastSpellKey = KeyCode.F;
 
     // The key to pick up a spell
-    private const KeyCode PickupSpellKey = KeyCode.E;
+    public const KeyCode PickupSpellKey = KeyCode.E;
     
     #endregion Keys
     

@@ -15,3 +15,5 @@ Q
 !Assets/Scripts/WinObjectScript.cs,6\0\60082ce834c87470870df183b91e803539092d74
 Z
 *Assets/Scripts/WinObjectCollectorScript.cs,8\4\847c75ae610abb52dc7e931ea95c63be017ecbd2
+R
+"Assets/Scripts/PlayerController.cs,4\4\44b5ee73c2a49f17e211a16dea550f3a1d42e622

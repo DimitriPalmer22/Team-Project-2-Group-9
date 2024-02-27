@@ -32,12 +32,6 @@ public class EnemyController : MonoBehaviour
     
     #endregion Fields
     
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     // Update is called once per frame
     void Update()
     {
@@ -128,8 +122,6 @@ public class EnemyController : MonoBehaviour
             }
         }
 
-        // Debug log the current target player
-        // Debug.Log($"Target player: ({_targetPlayer}) ({_timeSincePlayerLastSeen} seconds since last seen).");
     }
 
     /// <summary>
@@ -165,7 +157,7 @@ public class EnemyController : MonoBehaviour
 
     /// <summary>
     /// Flash the enemy cyan while it is frozen
-    /// /summary>
+    /// </summary>
     private IEnumerator FlashWhileFrozen()
     {
         // The duration of each blink

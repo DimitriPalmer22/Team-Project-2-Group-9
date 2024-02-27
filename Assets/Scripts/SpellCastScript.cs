@@ -176,12 +176,12 @@ public class SpellCastScript : MonoBehaviour
         // Set the remaining spell duration to 0
         _spellEffectRemaining = 0;
         
+        // Don't deactivate the spell if it's not active
+        if (!_isSpellActive)
+            return;
+        
         // set the spell to inactive
         _isSpellActive = false;
-        
-        // Don't deactivate the spell if it's not active
-        if (_isSpellActive)
-            return;
         
         // Different effects depending on the current spell type
         switch (_spellType)

@@ -6,29 +6,25 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     #region Fields
-    
-    
+
     /// <summary>
     /// The speed at which the player moves
     /// </summary>
-    [Header("Player Controller Fields")]
-    public float speed = 12f;
-    
+    [Header("Player Controller Fields")] public float speed = 12f;
+
     // Reference to the character controller 
     private CharacterController _controller;
 
-    [Header("Mouse Fields")]
-    
-    public float mouseSensitivity;
-    
+    [Header("Mouse Fields")] public float mouseSensitivity;
+
     private Transform _playerTransform;
 
     private float _xRotation;
 
     private Transform _cameraTransform;
-    
+
     #endregion Fields
-    
+
     private void Start()
     {
         // Set the character controller to the attached character controller
@@ -49,7 +45,7 @@ public class PlayerController : MonoBehaviour
     {
         // Move the player's camera
         MouseMovement();
-        
+
         // Move the player
         PlayerMovement();
     }

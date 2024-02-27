@@ -157,5 +157,39 @@ public class EnemyController : MonoBehaviour
     public void SetFrozen(bool isFrozen)
     {
         _isFrozen = isFrozen;
+
+        // If the enemy is now frozen, start the flash while frozen coroutine
+        if (_isFrozen)
+            StartCoroutine(FlashWhileFrozen());
+
     }
+
+    /// <summary>
+    /// Flash the enemy cyan while it is frozen
+    /// /summary>
+    private IEnumerator FlashWhileFrozen()
+    {
+        // The duration of each blink
+        const float blinkDuration = .1f;
+        
+        // Get the enemy's material
+        Material rendererMaterial = GetComponent<Renderer>().material;
+        
+        // While the enemy is frozen
+        while (_isFrozen)
+        {
+            // Set the enemy's material to be cyan
+            rendererMaterial.color = Color.cyan;
+            
+            // Wait for the blink duration
+            yield return new WaitForSeconds(blinkDuration);
+
+            // Set the enemy's material to be white
+            rendererMaterial.color = Color.white;
+            
+            // Wait for the blink duration
+            yield return new WaitForSeconds(blinkDuration);
+        }
+    }
+    
 }

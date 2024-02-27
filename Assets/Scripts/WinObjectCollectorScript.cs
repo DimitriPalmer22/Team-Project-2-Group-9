@@ -65,7 +65,7 @@ public class WinObjectCollectorScript : MonoBehaviour
         // RayCast to determine if the player is looking at a GameObject tagged "Spell Pickup"
         var hitAGameObject = Physics.Raycast(
             cameraTransform.position, 
-            cameraTransform.forward, out var hit, 10);
+            cameraTransform.forward, out var hit, SpellCastScript.PickupDistance);
         
         // If the player is not looking at a GameObject, return
         if (!hitAGameObject) 

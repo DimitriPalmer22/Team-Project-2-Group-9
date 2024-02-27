@@ -36,8 +36,8 @@ public class SpellCastScript : MonoBehaviour
     /// </summary>
     private bool _isSpellActive;
     
-    // A SpellPickupScript object that the player is looking at 
-    private SpellPickupScript _spellPickupScript;
+    // The distance from which the player can pick up a spell
+    public const float PickupDistance = 3;
     
     // The camera
     private Camera _camera;
@@ -101,12 +101,16 @@ public class SpellCastScript : MonoBehaviour
         if (Input.GetKeyDown(CastSpellKey))
             CastSpell();
         
-        // Determine which spell the player is looking at
-        DetermineLookedAtSpell();
-        
         // If the player presses the spell pickup button, pick up the spell
-        if (Input.GetKeyDown(PickupSpellKey) && _spellPickupScript != null)
-            _spellPickupScript.PickUpSpell(this);
+        if (Input.GetKeyDown(PickupSpellKey))
+        {
+            // Determine which spell the player is looking at
+            var spellPickupScript = DetermineLookedAtSpell();
+
+            // If the player is looking at a spell, pick it up
+            if (spellPickupScript != null)
+                spellPickupScript.PickUpSpell(this);
+        }
         
         // If the player presses L, pick up a freeze spell
         if (Input.GetKeyDown(KeyCode.L))
@@ -172,6 +176,13 @@ public class SpellCastScript : MonoBehaviour
         // Set the remaining spell duration to 0
         _spellEffectRemaining = 0;
         
+        // set the spell to inactive
+        _isSpellActive = false;
+        
+        // Don't deactivate the spell if it's not active
+        if (_isSpellActive)
+            return;
+        
         // Different effects depending on the current spell type
         switch (_spellType)
         {
@@ -187,38 +198,32 @@ public class SpellCastScript : MonoBehaviour
             default:
                 break;
         }
-        
-        // set the spell to inactive
-        _isSpellActive = false;
     }
 
 
     /// <summary>
     /// Determine which spell the player is looking at
     /// </summary>
-    private void DetermineLookedAtSpell()
+    private SpellPickupScript DetermineLookedAtSpell()
     {
-        // Reset the spell pickup script
-        _spellPickupScript = null;
-        
         // Get the camera's transform
         var cameraTransform = _camera.transform;
         
         // RayCast to determine if the player is looking at a GameObject tagged "Spell Pickup"
         var hitAGameObject = Physics.Raycast(
             cameraTransform.position, 
-            cameraTransform.forward, out var hit, 10);
+            cameraTransform.forward, out var hit, PickupDistance);
 
         // If the player is not looking at a GameObject, return
         if (!hitAGameObject) 
-            return;
+            return null;
 
         // If the player is not looking at a spell, return
         if (!hit.collider.CompareTag("Spell Pickup")) 
-            return;
+            return null;
         
-        // Set the _spellPickupScript to the SpellPickupScript of the object the player is looking at
-        _spellPickupScript = hit.collider.GetComponent<SpellPickupScript>();
+        // return the SpellPickupScript of the object the player is looking at
+        return hit.collider.GetComponent<SpellPickupScript>();
     }
     
     /// <summary>
@@ -227,6 +232,9 @@ public class SpellCastScript : MonoBehaviour
     /// <param name="spellType"></param>
     public void PickUpSpell(SpellCastType spellType)
     {
+        // Deactivate the player's current spell
+        DeactivateSpell();
+        
         // Set the current spell type to the one the player picked up
         _spellType = spellType;
         

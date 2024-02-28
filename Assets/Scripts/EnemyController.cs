@@ -31,6 +31,15 @@ public class EnemyController : MonoBehaviour
     private bool _isFrozen;
     
     #endregion Fields
+
+    #region Properties
+
+    /// <summary>
+    /// Is the player spotted by the enemy?
+    /// </summary>
+    public bool IsPlayerSpotted => _targetPlayer != null;
+
+    #endregion
     
     // Update is called once per frame
     void Update()

@@ -17,3 +17,5 @@ Z
 *Assets/Scripts/WinObjectCollectorScript.cs,8\4\847c75ae610abb52dc7e931ea95c63be017ecbd2
 R
 "Assets/Scripts/PlayerController.cs,4\4\44b5ee73c2a49f17e211a16dea550f3a1d42e622
+N
+Assets/Scripts/EnemyNavMesh.cs,7\5\7597d74eb8cfe3b151b1c2a3f0bcd91faad8f66f

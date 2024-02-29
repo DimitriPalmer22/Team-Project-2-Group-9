@@ -38,6 +38,11 @@ public class EnemyController : MonoBehaviour
     /// Is the player spotted by the enemy?
     /// </summary>
     public bool IsPlayerSpotted => _targetPlayer != null;
+    
+    /// <summary>
+    /// The target player
+    /// </summary>
+    public GameObject TargetPlayer => _targetPlayer;
 
     #endregion
     
@@ -51,8 +56,8 @@ public class EnemyController : MonoBehaviour
         // Determine the target player
         DetermineTarget();
         
-        // Look toward the target player
-        LookTowardTarget();
+        // // Look toward the target player
+        // LookTowardTarget();
     }
 
     /// <summary>

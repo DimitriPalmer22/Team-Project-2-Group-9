@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Linq;
 using UnityEngine;
@@ -5,8 +6,15 @@ using UnityEngine;
 public class EnemyController : MonoBehaviour
 {
 
-    // The time it takes for the enemy to lose the player
+    /// <summary>
+    /// The time it takes for the enemy to lose the player 
+    /// </summary>
     private const float LosePlayerTime = 3f;
+
+    /// <summary>
+    /// The time it takes for the enemy to investigate the player & spot them 
+    /// </summary>
+    private const float InvestigationTime = 1.5f;
     
     #region Fields
     
@@ -15,10 +23,15 @@ public class EnemyController : MonoBehaviour
     /// </summary>
     private GameObject _targetPlayer;
 
+    // /// <summary>
+    // /// How long it has been since the player was last seen 
+    // /// </summary>
+    // private float _timeSincePlayerLastSeen;
+
     /// <summary>
-    /// How long it has been since the player was last seen 
+    /// The time the enemy has been investigating the player
     /// </summary>
-    private float _timeSincePlayerLastSeen;
+    private float _timeInvestigating;
 
     /// <summary>
     /// The range at which the enemy can see players
@@ -30,6 +43,27 @@ public class EnemyController : MonoBehaviour
     /// </summary>
     private bool _isFrozen;
     
+    /// <summary>
+    /// The state of the enemy's patrol
+    /// TODO: Make this private & unserialize
+    /// </summary>
+    [SerializeField] private EnemyPatrolState _patrolState;
+
+    /// <summary>
+    /// Is the enemy currently losing the target player?
+    /// </summary>
+    private bool _losingTarget;
+
+    /// <summary>
+    /// Was the enemy chasing the player before losing them? 
+    /// </summary>
+    private bool _wasChasingBeforeLosing;
+    
+    /// <summary>
+    /// The last known position of the player
+    /// </summary>
+    private Vector3 _lastKnownPlayerPosition;
+    
     #endregion Fields
 
     #region Properties
@@ -37,18 +71,57 @@ public class EnemyController : MonoBehaviour
     /// <summary>
     /// Is the player spotted by the enemy?
     /// </summary>
-    public bool IsPlayerSpotted => _targetPlayer != null;
+    public bool IsPlayerSpotted => _targetPlayer != null && _timeInvestigating >= InvestigationTime;
     
     /// <summary>
     /// The target player
     /// </summary>
     public GameObject TargetPlayer => _targetPlayer;
+    
+    public EnemyPatrolState PatrolState => _patrolState;
+    
+    
+    /// <summary>
+    /// The last known position of the player
+    /// </summary>
+    public Vector3 LastKnownPlayerPosition => _lastKnownPlayerPosition;
+    
 
     #endregion
     
     // Update is called once per frame
     void Update()
     {
+        // TODO: Delete this later
+        var material = GetComponent<Renderer>().material;
+
+        switch (_patrolState)
+        {
+            case EnemyPatrolState.Patrol:
+                material.color = Color.white;
+                break;
+            
+            case EnemyPatrolState.Investigate:
+                material.color = Color.yellow* (_timeInvestigating / InvestigationTime);
+                break;
+            
+            case EnemyPatrolState.Chase:
+                material.color = Color.red;
+                break;
+            
+            case EnemyPatrolState.Lost:
+                material.color = Color.red* (_timeInvestigating / InvestigationTime);
+                break;
+            
+            case EnemyPatrolState.Idle:
+                material.color = Color.white;
+                break;
+            
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
+            
+        
         // If the enemy is frozen, return
         if (_isFrozen)
             return;
@@ -58,6 +131,10 @@ public class EnemyController : MonoBehaviour
         
         // // Look toward the target player
         // LookTowardTarget();
+        
+        // Determine the Patrol State
+        DeterminePatrolState();
+        
     }
 
     /// <summary>
@@ -122,20 +199,89 @@ public class EnemyController : MonoBehaviour
 
             // Update the time since the player was last seen
             if (isPlayerVisible)
-                _timeSincePlayerLastSeen = 0;
+            {
+                // Update the last known position of the player
+                _lastKnownPlayerPosition = _targetPlayer.transform.position;
+                
+                // // If the player is visible, reset the time since the player was last seen
+                // _timeSincePlayerLastSeen = 0;
+                
+                // If the player is visible, increment and clamp the time investigating
+                _timeInvestigating = Mathf.Clamp(_timeInvestigating + Time.deltaTime, 0, InvestigationTime);
+
+                // If the enemy is currently losing the target, immediately finish investigating
+                if (_losingTarget && _wasChasingBeforeLosing)
+                    _timeInvestigating = InvestigationTime;
+                
+                // If the enemy has been investigating for more than the investigation time, 
+                // set was chasing before losing to true
+                if (_timeInvestigating >= InvestigationTime)
+                    _wasChasingBeforeLosing = true;
+                
+                // If the player is visible, set the losing target player to false
+                _losingTarget = false;
+            }
             else
             {
-                _timeSincePlayerLastSeen += Time.deltaTime;
+                // // If the player is not visible, increment the time since the player was last seen
+                // _timeSincePlayerLastSeen += Time.deltaTime;
+                
+                // If the player is not visible, decrement the time investigating
+                _timeInvestigating = Mathf.Clamp(_timeInvestigating - Time.deltaTime, 0, InvestigationTime);
+
+                _losingTarget = true;
                 
                 // If the player has been lost for too long, set the target player to null
-                if (_timeSincePlayerLastSeen > LosePlayerTime)
+                if (_timeInvestigating <= 0)
                 {
+                    // If the enemy has fully lost the target, reset losing target to false
+                    _losingTarget = false;
+
+                    // reset the target player
                     _targetPlayer = null;
-                    _timeSincePlayerLastSeen = 0;
+                    
+                    // reset was chasing before losing
+                    _wasChasingBeforeLosing = false;
+                    
+                    // _timeSincePlayerLastSeen = 0;
                 }
             }
         }
 
+    }
+    
+    private void DeterminePatrolState()
+    {
+        // If the enemy has no target player, set the patrol state to patrol
+        if (_targetPlayer == null && _patrolState != EnemyPatrolState.Patrol)
+        {
+            _patrolState = EnemyPatrolState.Patrol;
+            GetComponent<EnemyNavMesh>().SetNearestPatrolTarget();
+            return;
+        }
+        
+        // If the enemy has spotted the player recently
+        if (_timeInvestigating > 0)
+        {
+            // If the enemy has been investigating for more than the investigation time,
+            // set the patrol state to chase
+            if (_timeInvestigating >= InvestigationTime)
+                _patrolState = EnemyPatrolState.Chase;
+            
+            // If the enemy has been investigating for less than the investigation time
+            
+            // If the enemy is currently losing the player, set the patrol state to lost
+            else if (_losingTarget)
+                _patrolState = EnemyPatrolState.Lost;
+            
+            // If the enemy is not losing the player, but their investigation time is less than the investigation time,
+            // then they are investigating
+            else
+                _patrolState = EnemyPatrolState.Investigate;
+            
+            return;
+        }
+        
     }
 
     /// <summary>
@@ -147,9 +293,9 @@ public class EnemyController : MonoBehaviour
         if (_targetPlayer == null)
             return;
         
-        // if the player was last seen more than 0 seconds ago, return
-        if (_timeSincePlayerLastSeen > 0)
-            return;
+        // // if the player was last seen more than 0 seconds ago, return
+        // if (_timeSincePlayerLastSeen > 0)
+        //     return;
         
         // Look at the target player
         transform.LookAt(_targetPlayer.transform);

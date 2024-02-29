@@ -1,8 +1,6 @@
 
-„csharpsquid:S3928`"[Use a constructor overloads that allows a more meaningful exception message to be provided.(«èñýÿÿÿÿ8¤äÍ¶ß1
-Tcsharpsquid:S3903›"/Move 'EnemyPatrolState' into a named namespace.(æÏñ8´üå¶ß1
+„csharpsquid:S3928d"[Use a constructor overloads that allows a more meaningful exception message to be provided.(«èñýÿÿÿÿ8¤äÍ¶ß1
+Tcsharpsquid:S3903Ó"/Move 'EnemyPatrolState' into a named namespace.(æÏñ8«¤¡¸ß1
 Hcsharpsquid:S3903"+Move 'EnemyNavMesh' into a named namespace.(ÌÉ„ž
-bcsharpsquid:S3459">Remove unassigned field '_navigationTarget', or set its value.(¸¸ý”8ªÆÜ¶ß1
-Ccsharpsquid:S125Œ"Remove this commented out code.(àž®é8´üå¶ß1
 Xcsharpsquid:S1135%"4Complete the task associated to this 'TODO' comment.(ìõóú8˜üÄ¶ß1
-]csharpsquid:S1135C"4Complete the task associated to this 'TODO' comment.(¤ø¬–þÿÿÿÿ8ç˜Ô¶ß1
+]csharpsquid:S1135G"4Complete the task associated to this 'TODO' comment.(¤ø¬–þÿÿÿÿ8ç˜Ô¶ß1

@@ -45,9 +45,8 @@ public class EnemyController : MonoBehaviour
     
     /// <summary>
     /// The state of the enemy's patrol
-    /// TODO: Make this private & unserialize
     /// </summary>
-    [SerializeField] private EnemyPatrolState _patrolState;
+    private EnemyPatrolState _patrolState;
 
     /// <summary>
     /// Is the enemy currently losing the target player?
@@ -223,9 +222,6 @@ public class EnemyController : MonoBehaviour
             }
             else
             {
-                // // If the player is not visible, increment the time since the player was last seen
-                // _timeSincePlayerLastSeen += Time.deltaTime;
-                
                 // If the player is not visible, decrement the time investigating
                 _timeInvestigating = Mathf.Clamp(_timeInvestigating - Time.deltaTime, 0, InvestigationTime);
 
@@ -292,10 +288,6 @@ public class EnemyController : MonoBehaviour
         // If the target player is null, return
         if (_targetPlayer == null)
             return;
-        
-        // // if the player was last seen more than 0 seconds ago, return
-        // if (_timeSincePlayerLastSeen > 0)
-        //     return;
         
         // Look at the target player
         transform.LookAt(_targetPlayer.transform);

@@ -36,7 +36,7 @@ public class EnemyNavMesh : MonoBehaviour
     /// DO NOT CHANGE THIS IN THE INSPECTOR
     /// TODO: Make this private
     /// </summary>
-    [SerializeField] private int _currentPatrolIndex;
+    private int _currentPatrolIndex;
     
     #endregion
 
@@ -68,8 +68,10 @@ public class EnemyNavMesh : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // TODO: Make a transform object that follows the player's position while they are spotted
-
+        
+        // Debug log the patrol state
+        Debug.Log($"Patrol State: {PatrolState}");
+        
         switch (PatrolState)
         {
             // if the enemy is patrolling, navigate to the current checkpoint
@@ -100,9 +102,6 @@ public class EnemyNavMesh : MonoBehaviour
                 throw new ArgumentOutOfRangeException();
         }
         
-        // set the destination of the nav mesh agent to the navigation target
-        if (_navigationTarget != null && _navMeshAgent != null && _navMeshAgent.enabled)
-            _navMeshAgent.destination = _navigationTarget.position;
     }
 
     #endregion
@@ -142,6 +141,8 @@ public class EnemyNavMesh : MonoBehaviour
         // if the enemy is close to the current patrol checkpoint, increment the current patrol index
         if (Vector3.Distance(transform.position, _patrolCheckpoints[_currentPatrolIndex].position) < PatrolCheckpointDistance)
             _currentPatrolIndex = (_currentPatrolIndex + 1) % _patrolCheckpoints.Length;
+        
+        Debug.Log($"Current Patrol Index: {_currentPatrolIndex}");
         
         // set the nav mesh agent's destination to the current patrol checkpoint
         _navMeshAgent.destination = _patrolCheckpoints[_currentPatrolIndex].position;

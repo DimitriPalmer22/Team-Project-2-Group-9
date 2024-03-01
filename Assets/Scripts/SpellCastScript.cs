@@ -15,6 +15,9 @@ public class SpellCastScript : MonoBehaviour
     
     // The distance from which the player can pick up a spell
     public const float PickupDistance = 3;
+
+    // The number of particles to emit
+    private const int ParticlesAmount = 200;
     
     #region Fields
     
@@ -152,15 +155,25 @@ public class SpellCastScript : MonoBehaviour
 
                 // Freeze the enemy 
                 StartCoroutine(FreezeEnemy(enemyController));
+                
+                // Play the freeze sound
+                _freezeSource.Play();
+                
+                // TODO: Play the freeze particles
+                _freezeParticles.Emit(ParticlesAmount);
+                
                 break;
             
             // Invisibility spell
             case SpellCastType.Invisibility:
                 // Apply the invisibility effect
-                break;
-            
-            // Teleport spell
-            case SpellCastType.Teleport:
+                
+                // Play the invisibility sound
+                _invisibilitySource.Play();
+                
+                // TODO: Play the invisibility particles
+                _invisibilityParticles.Emit(ParticlesAmount);
+                
                 break;
             
             default:

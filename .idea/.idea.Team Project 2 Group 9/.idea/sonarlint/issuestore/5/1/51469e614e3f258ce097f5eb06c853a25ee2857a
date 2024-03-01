@@ -1,6 +1,3 @@
 
 Gcsharpsquid:S3903"+Move 'GlobalScript' into a named namespace.(Ìİ¥G
-csharpsquid:S1186–"yAdd a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.(ìš«û8¯ıê¾ß1
-csharpsquid:S1186›"yAdd a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.(é¬’:8Ìİë¾ß1
-^csharpsquid:S3459":Remove unassigned field '_isGamePaused', or set its value.(£Á´8€¿¾ß1
-Xcsharpsquid:S1135X"4Complete the task associated to this 'TODO' comment.(¾‘á§8•ğ½ß1
+Ycsharpsquid:S1135†"4Complete the task associated to this 'TODO' comment.(¾‘á§8‰‹ß¿ß1

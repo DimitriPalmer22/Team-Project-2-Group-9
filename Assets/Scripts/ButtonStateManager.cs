@@ -63,4 +63,13 @@ public class ButtonStateManager : MonoBehaviour
     {
         return PlayerPrefs.GetInt(NoviceButtonKey, 0) == 1;
     }
+
+    public void ExitGame()
+    {
+        // Debug log "Exiting the app"
+        Debug.Log("Exiting the app");
+        
+        // Exit the game
+        Application.Quit();
+    }
 }

@@ -23,3 +23,5 @@ Q
 !Assets/Scripts/WinObjectScript.cs,6\0\60082ce834c87470870df183b91e803539092d74
 T
 $Assets/Scripts/ButtonStateManager.cs,6\a\6a4c805384f750d9c365a2a08a7bf1b718c7c753
+R
+"Assets/Scripts/TypewriterEffect.cs,e\5\e5a7ea7ed36725703adda998029a96ee4f29f862

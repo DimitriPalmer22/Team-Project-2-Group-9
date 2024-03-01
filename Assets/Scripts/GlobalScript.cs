@@ -88,7 +88,7 @@ public class GlobalScript : MonoBehaviour
         // TODO: Disable player input
 
         // Freeze the game
-        // Time.timeScale = 0;
+        Time.timeScale = 0;
     }
 
     public void WinGame()
@@ -145,6 +145,16 @@ public class GlobalScript : MonoBehaviour
         
         // Exit the app
         Application.Quit();
+    }
+
+    private void PauseGame()
+    {
+        
+    }
+    
+    private void UnpauseGame()
+    {
+        
     }
 
     #endregion

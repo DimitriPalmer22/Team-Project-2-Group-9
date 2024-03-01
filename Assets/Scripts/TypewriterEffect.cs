@@ -21,7 +21,7 @@ public class TypewriterEffect : MonoBehaviour
         {
             currentText = fullText.Substring(0, i);
             textComponent.text = currentText;
-            yield return new WaitForSeconds(typingSpeed);
+            yield return new WaitForSecondsRealtime(typingSpeed);
         }
     }
 }

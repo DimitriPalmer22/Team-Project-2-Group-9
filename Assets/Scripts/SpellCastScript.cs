@@ -13,6 +13,9 @@ public class SpellCastScript : MonoBehaviour
     /// </summary>
     private const float FreezeDuration = 3;
     
+    // The distance from which the player can pick up a spell
+    public const float PickupDistance = 3;
+    
     #region Fields
     
     /// <summary>
@@ -34,9 +37,14 @@ public class SpellCastScript : MonoBehaviour
     /// Boolean to determine if the spell is currently active
     /// </summary>
     private bool _isSpellActive;
+
+    [Header("Freeze Spell")]
+    [SerializeField] private AudioSource _freezeSource;
+    [SerializeField] private ParticleSystem _freezeParticles;
     
-    // The distance from which the player can pick up a spell
-    public const float PickupDistance = 3;
+    [Header("Invisibility Spell")]
+    [SerializeField] private AudioSource _invisibilitySource;
+    [SerializeField] private ParticleSystem _invisibilityParticles;
     
     // The camera
     private Camera _camera;
@@ -91,6 +99,8 @@ public class SpellCastScript : MonoBehaviour
         }
     }
 
+    #region Methods
+    
     /// <summary>
     /// Read the player's input
     /// </summary>
@@ -301,5 +311,7 @@ public class SpellCastScript : MonoBehaviour
         // Debug Log that the enemy is unfrozen
         Debug.Log("Unfreezing the enemy");
     }
+    
+    #endregion
     
 }

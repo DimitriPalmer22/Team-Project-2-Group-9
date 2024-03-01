@@ -70,10 +70,6 @@ public class EnemyNavMesh : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        // Debug log the patrol state
-        Debug.Log($"Patrol State: {PatrolState}");
-        
         switch (PatrolState)
         {
             // if the enemy is patrolling, navigate to the current checkpoint
@@ -155,8 +151,6 @@ public class EnemyNavMesh : MonoBehaviour
         // if the enemy is close to the current patrol checkpoint, increment the current patrol index
         if (Vector3.Distance(transform.position, _patrolCheckpoints[_currentPatrolIndex].position) < PatrolCheckpointDistance)
             _currentPatrolIndex = (_currentPatrolIndex + 1) % _patrolCheckpoints.Length;
-        
-        Debug.Log($"Current Patrol Index: {_currentPatrolIndex}");
         
         // set the nav mesh agent's destination to the current patrol checkpoint
         _navMeshAgent.destination = _patrolCheckpoints[_currentPatrolIndex].position;

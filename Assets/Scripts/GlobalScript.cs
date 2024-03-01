@@ -23,6 +23,12 @@ public class GlobalScript : MonoBehaviour
     // Audio source variable for music
     private AudioSource _musicSource;
     
+    [Header("UI")]
+    
+    [SerializeField] private GameObject winScreen;
+    
+    [SerializeField] private GameObject loseScreen;
+    
     #endregion Fields
      
 
@@ -43,6 +49,10 @@ public class GlobalScript : MonoBehaviour
     {
         // Get audio source component for music
         _musicSource = GetComponent<AudioSource>();
+        
+        // Hide win and lose screens
+        winScreen.SetActive(false);
+        loseScreen.SetActive(false);
     }
 
     // Update is called once per frame
@@ -60,6 +70,11 @@ public class GlobalScript : MonoBehaviour
         // If the game is already over, return
         if (_isGameOver)
             return;
+
+        // Show the cursor
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+
         
         // Set the game over boolean to true
         _isGameOver = true;
@@ -67,7 +82,7 @@ public class GlobalScript : MonoBehaviour
         // TODO: Disable player input
         
         // Freeze the game
-        Time.timeScale = 0;
+        // Time.timeScale = 0;
 
     }
     
@@ -79,7 +94,8 @@ public class GlobalScript : MonoBehaviour
         // Play win music
         PlayMusic(winMusic);
 
-        // TODO: Display win screen
+        // Display win screen
+        winScreen.SetActive(true);
 
     }
 
@@ -91,7 +107,8 @@ public class GlobalScript : MonoBehaviour
         // Play lose music
         PlayMusic(loseMusic);
         
-        // TODO: Display lose screen
+        // Display lose screen
+        loseScreen.SetActive(true);
         
     }
 

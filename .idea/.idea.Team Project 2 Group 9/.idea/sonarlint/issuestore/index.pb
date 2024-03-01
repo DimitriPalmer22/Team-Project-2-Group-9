@@ -5,3 +5,21 @@ N
 Assets/Scripts/EnemyNavMesh.cs,7\5\7597d74eb8cfe3b151b1c2a3f0bcd91faad8f66f
 Q
 !Assets/Scripts/EnemyController.cs,6\c\6c715b6de3e5b59d312d0741b401cfcecbe4d859
+R
+"Assets/Scripts/PlayerController.cs,4\4\44b5ee73c2a49f17e211a16dea550f3a1d42e622
+Q
+!Assets/Scripts/SpellCastScript.cs,c\a\ca3ff5ec020b75755d9d3aa8521b9d472261276c
+G
+Assets/Scripts/Actor.cs,f\9\f9d006b0f3803849405b2d89277ce4990cb2188e
+M
+Assets/Scripts/ActorPlayer.cs,4\1\418b5dfacbc3c01038066563c8055a3e270c9c25
+L
+Assets/Scripts/ActroEnemy.cs,6\4\648869cb00da2df4639955d6b71a082feefb0412
+M
+Assets/Scripts/LevelScript.cs,e\9\e9f9d5befc2543c03dee0c52c3c8a491d9e66368
+N
+Assets/Scripts/GlobalScript.cs,5\1\51469e614e3f258ce097f5eb06c853a25ee2857a
+Q
+!Assets/Scripts/WinObjectScript.cs,6\0\60082ce834c87470870df183b91e803539092d74
+T
+$Assets/Scripts/ButtonStateManager.cs,6\a\6a4c805384f750d9c365a2a08a7bf1b718c7c753

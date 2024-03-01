@@ -9,6 +9,8 @@ public class EnemyNavMesh : MonoBehaviour
 
     private const float PatrolCheckpointDistance = 3f;
     
+    private const float StopAndFireDistance = 3f;
+    
     #region Fields
 
     /// <summary>
@@ -114,15 +116,24 @@ public class EnemyNavMesh : MonoBehaviour
         if (PatrolState != EnemyPatrolState.Chase)
             return;
 
+        // enable the nav mesh agent
+        _navMeshAgent.enabled = true;
+        
         // set the navigation target to the player's transform
         _navigationTarget = _enemyController.TargetPlayer.transform;
         
         // Set the nav mesh agent's destination to the player's position
         _navMeshAgent.destination = _enemyController.TargetPlayer.transform.position;
         
-        // enable the nav mesh agent
-        _navMeshAgent.enabled = _enemyController.IsPlayerSpotted;
-        
+        // Disable the nav mesh agent if the player is within the stop and fire distance
+        var distance = Vector3.Distance(transform.position, _enemyController.TargetPlayer.transform.position);
+        if (distance < StopAndFireDistance)
+        {
+            _navMeshAgent.enabled = false;
+            
+            // // look at the player
+            // transform.LookAt(_enemyController.TargetPlayer.transform);
+        }        
     }
 
     private void NavigateIfPatrolling()
@@ -135,6 +146,9 @@ public class EnemyNavMesh : MonoBehaviour
         if (_patrolCheckpoints.Length == 0)
             return;
         
+        // enable the nav mesh agent
+        _navMeshAgent.enabled = true;
+        
         // modulus the current patrol index by the length of the patrol checkpoints array (Avoid IndexOutOfRangeException)
         _currentPatrolIndex %= _patrolCheckpoints.Length;
         
@@ -146,9 +160,6 @@ public class EnemyNavMesh : MonoBehaviour
         
         // set the nav mesh agent's destination to the current patrol checkpoint
         _navMeshAgent.destination = _patrolCheckpoints[_currentPatrolIndex].position;
-        
-        // enable the nav mesh agent
-        _navMeshAgent.enabled = true;
     }
 
     private void NavigateIfLost()
@@ -157,11 +168,16 @@ public class EnemyNavMesh : MonoBehaviour
         if (PatrolState != EnemyPatrolState.Lost)
             return;
         
+        // enable the nav mesh agent
+        _navMeshAgent.enabled = true;
+        
         // if the enemy is lost, navigate to the last known player position
         _navMeshAgent.destination = _enemyController.LastKnownPlayerPosition;
         
-        // enable the nav mesh agent
-        _navMeshAgent.enabled = true;
+        // Disable the nav mesh agent if the destination is within the stop and fire distance
+        var distance = Vector3.Distance(transform.position, _navMeshAgent.destination);
+        if (distance < StopAndFireDistance)
+            _navMeshAgent.enabled = false;
     }
     
     private void NavigateIfInvestigating()
@@ -169,6 +185,9 @@ public class EnemyNavMesh : MonoBehaviour
         // return if the patrol state is not investigate
         if (PatrolState != EnemyPatrolState.Investigate)
             return;
+
+        // enable the nav mesh agent
+        _navMeshAgent.enabled = true;
         
         // set the navigation target to the player's transform
         _navigationTarget = _enemyController.TargetPlayer.transform;
@@ -176,8 +195,14 @@ public class EnemyNavMesh : MonoBehaviour
         // if the enemy is investigating, navigate to the last known player position
         _navMeshAgent.destination = _enemyController.LastKnownPlayerPosition;
         
-        // enable the nav mesh agent
-        _navMeshAgent.enabled = true;
+        // Disable the nav mesh agent if the destination is within the stop and fire distance
+        var distance = Vector3.Distance(transform.position, _navMeshAgent.destination);
+        if (distance < StopAndFireDistance)
+            _navMeshAgent.enabled = false;
+
+        // // look at the player
+        // transform.LookAt(_enemyController.TargetPlayer.transform);
+
     }
     
     public void SetNearestPatrolTarget()

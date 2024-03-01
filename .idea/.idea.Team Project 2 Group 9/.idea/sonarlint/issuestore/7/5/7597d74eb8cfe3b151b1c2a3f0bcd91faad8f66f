@@ -1,5 +1,7 @@
 
-„csharpsquid:S3928f"[Use a constructor overloads that allows a more meaningful exception message to be provided.(«èñıÿÿÿÿ8¤äÍ¶ß1
-Tcsharpsquid:S3903Ô"/Move 'EnemyPatrolState' into a named namespace.(æÏñ8«¤¡¸ß1
+„csharpsquid:S3928h"[Use a constructor overloads that allows a more meaningful exception message to be provided.(«èñıÿÿÿÿ8¤äÍ¶ß1
+Tcsharpsquid:S3903í"/Move 'EnemyPatrolState' into a named namespace.(æÏñ8½ê¼ß1
 Hcsharpsquid:S3903"+Move 'EnemyNavMesh' into a named namespace.(ÌÉ„
-Xcsharpsquid:S1135%"4Complete the task associated to this 'TODO' comment.(ìõóú8˜üÄ¶ß1
+Ccsharpsquid:S125‡"Remove this commented out code.(¶èÊƒ8Ü‹†¼ß1
+Ccsharpsquid:S125Ì"Remove this commented out code.(¶èÊƒ8Áê¼ß1
+Xcsharpsquid:S1135'"4Complete the task associated to this 'TODO' comment.(ìõóú8˜üÄ¶ß1

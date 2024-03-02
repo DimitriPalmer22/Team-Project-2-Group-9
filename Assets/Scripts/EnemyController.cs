@@ -11,7 +11,7 @@ public class EnemyController : MonoBehaviour
 
     #region Master Mode
 
-    private const float MasterDetectionMultiplier = .75f;
+    private const float MasterDetectionMultiplier = 1.5f;
 
     private const float MasterDetectionRangeMultiplier = 1.5f;
 
@@ -304,7 +304,13 @@ public class EnemyController : MonoBehaviour
         // If the enemy has been investigating for more than the investigation time,
         // set the patrol state to chase
         if (_timeInvestigating >= InvestigationTime)
+        {
+            // If the enemy was previously investigating, restart the shooting cooldown
+            if (_patrolState == EnemyPatrolState.Investigate)
+                StartCoroutine(ResetCanShoot());
+
             _patrolState = EnemyPatrolState.Chase;
+        }
 
         // The enemy has been investigating for less than the investigation time
 

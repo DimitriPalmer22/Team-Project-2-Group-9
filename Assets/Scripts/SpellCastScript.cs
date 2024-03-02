@@ -132,6 +132,8 @@ public class SpellCastScript : MonoBehaviour
         }
         
         // If the player presses L, pick up a freeze spell
+        // TODO: DELETE THIS LINE LATER
+        // ! @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
         if (Input.GetKeyDown(KeyCode.L))
             PickUpSpell(SpellCastType.Freeze);
         

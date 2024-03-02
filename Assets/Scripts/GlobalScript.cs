@@ -27,6 +27,9 @@ public class GlobalScript : MonoBehaviour
     // Audio source variable for music
     [SerializeField] private AudioSource _musicSource;
 
+    // The volume the music should be reset to
+    private float _musicResetVolume;
+
     [Header("UI")] [SerializeField] private GameObject winScreen;
 
     [SerializeField] private GameObject loseScreen;
@@ -49,14 +52,18 @@ public class GlobalScript : MonoBehaviour
         // Set the instance to this object
         Instance = this;
 
-        // Play background music if the game is not over
-        if (!_isGameOver)
-            PlayMusic(backgroundMusic);
     }
 
     // Start is called before the first frame update
     void Start()
     {
+        // set the music reset volume to the music source's volume
+        _musicResetVolume = _musicSource.volume;
+
+        // Play background music if the game is not over
+        if (!_isGameOver)
+            PlayMusic(backgroundMusic);
+        
         // Hide win and lose screens
         winScreen.SetActive(false);
         loseScreen.SetActive(false);
@@ -165,6 +172,14 @@ public class GlobalScript : MonoBehaviour
         if (music == null)
             return;
 
+        // Set the music source's volume to half of the reset volume if the music is the win music
+        _musicSource.volume = (music == winMusic) 
+            ? _musicResetVolume / 2 
+            : _musicResetVolume;
+
+        // loop the audio source only if the music is the background music
+        _musicSource.loop = music == backgroundMusic;
+
         // Set the music source's clip to the music
         _musicSource.clip = music;
 
@@ -174,9 +189,6 @@ public class GlobalScript : MonoBehaviour
 
     public void ReturnToMainMenu()
     {
-        // Debug log "Returning to main menu"
-        Debug.Log("Returning to main menu");
-
         // Load the main menu scene
         SceneManager.LoadScene("MainMenu");
 
@@ -199,8 +211,6 @@ public class GlobalScript : MonoBehaviour
 
     private void PauseGame()
     {
-        Debug.Log("Pausing the game");
-
         // Pause the game
         Time.timeScale = 0;
 
@@ -228,8 +238,6 @@ public class GlobalScript : MonoBehaviour
 
     public void UnpauseGame()
     {
-        Debug.Log("Unpausing the game");
-
         // Unpause the game
         Time.timeScale = 1;
 

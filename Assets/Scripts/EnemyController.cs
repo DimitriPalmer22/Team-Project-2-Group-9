@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class EnemyController : MonoBehaviour
 {
@@ -20,12 +21,11 @@ public class EnemyController : MonoBehaviour
     private const float MasterDetectionMultiplier = .75f;
 
     private const float MasterDetectionRangeMultiplier = 1.5f;
-    
+
     private const float MasterFireRateMultiplier = 2f;
 
     #endregion
 
-    
     #region Fields
 
     /// <summary>
@@ -78,7 +78,6 @@ public class EnemyController : MonoBehaviour
     /// </summary>
     private bool _canShoot = true;
 
-
     /// <summary>
     /// The projectile prefab 
     /// </summary>
@@ -88,6 +87,12 @@ public class EnemyController : MonoBehaviour
     /// // The rate at which the enemy can shoot (Bullets per minute)
     /// </summary>
     [SerializeField] private float _fireRate;
+
+    [Header("Audio")] [SerializeField] private AudioSource _audioSource;
+
+    [SerializeField] private AudioClip _fireAudioClip;
+
+    [SerializeField] private AudioClip _frozenAudioClip;
 
     #endregion Fields
 
@@ -121,7 +126,28 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // TODO: Delete this later
+        // TODO: Delete Later
+        ChangeColorBasedOnState();
+
+        // If the enemy is frozen, return
+        if (_isFrozen)
+            return;
+
+        // Determine the target player
+        DetermineTarget();
+
+        // // Look toward the target player
+        // LookTowardTarget();
+
+        // Determine the Patrol State
+        DeterminePatrolState();
+
+        // Shoot if the player is within range
+        ShootIfWithinRange();
+    }
+
+    private void ChangeColorBasedOnState()
+    {
         var material = GetComponent<Renderer>().material;
 
         switch (_patrolState)
@@ -149,23 +175,6 @@ public class EnemyController : MonoBehaviour
             default:
                 throw new ArgumentOutOfRangeException();
         }
-
-
-        // If the enemy is frozen, return
-        if (_isFrozen)
-            return;
-
-        // Determine the target player
-        DetermineTarget();
-
-        // // Look toward the target player
-        // LookTowardTarget();
-
-        // Determine the Patrol State
-        DeterminePatrolState();
-
-        // Shoot if the player is within range
-        ShootIfWithinRange();
     }
 
     /// <summary>
@@ -197,10 +206,10 @@ public class EnemyController : MonoBehaviour
     /// <returns></returns>
     private bool IsPlayerVisible(GameObject player)
     {
-        float difficultyMultiplier = ButtonStateManager.IsMasterButtonFilled 
-            ? MasterDetectionRangeMultiplier 
+        float difficultyMultiplier = ButtonStateManager.IsMasterButtonFilled
+            ? MasterDetectionRangeMultiplier
             : 1;
-        
+
         // Cast a ray from the enemy to the player
         var rayHit = Physics.Raycast(transform.position, player.transform.position - transform.position,
             out RaycastHit hit, visionRange * difficultyMultiplier);
@@ -244,12 +253,13 @@ public class EnemyController : MonoBehaviour
 
 
                 // Create a multiplier for the difficulty
-                float difficultyMultiplier = ButtonStateManager.IsMasterButtonFilled 
-                    ? MasterDetectionMultiplier 
+                float difficultyMultiplier = ButtonStateManager.IsMasterButtonFilled
+                    ? MasterDetectionMultiplier
                     : 1;
-                
+
                 // If the player is visible, increment and clamp the time investigating
-                _timeInvestigating = Mathf.Clamp(_timeInvestigating + (Time.deltaTime * difficultyMultiplier), 0, InvestigationTime);
+                _timeInvestigating = Mathf.Clamp(_timeInvestigating + (Time.deltaTime * difficultyMultiplier), 0,
+                    InvestigationTime);
 
                 // If the enemy is currently losing the target, immediately finish investigating
                 if (_losingTarget && _wasChasingBeforeLosing)
@@ -266,12 +276,13 @@ public class EnemyController : MonoBehaviour
             else
             {
                 // Create a multiplier for the difficulty (divide this time)
-                float difficultyMultiplier = ButtonStateManager.IsMasterButtonFilled 
-                    ? MasterDetectionMultiplier 
+                float difficultyMultiplier = ButtonStateManager.IsMasterButtonFilled
+                    ? MasterDetectionMultiplier
                     : 1;
-                
+
                 // If the player is not visible, decrement the time investigating
-                _timeInvestigating = Mathf.Clamp(_timeInvestigating - (Time.deltaTime / difficultyMultiplier), 0, InvestigationTime);
+                _timeInvestigating = Mathf.Clamp(_timeInvestigating - (Time.deltaTime / difficultyMultiplier), 0,
+                    InvestigationTime);
 
                 _losingTarget = true;
 
@@ -349,7 +360,12 @@ public class EnemyController : MonoBehaviour
 
         // If the enemy is now frozen, start the flash while frozen coroutine
         if (_isFrozen)
+        {
             StartCoroutine(FlashWhileFrozen());
+
+            // Play the frozen audio
+            _audioSource.PlayOneShot(_frozenAudioClip);
+        }
     }
 
     /// <summary>
@@ -395,8 +411,8 @@ public class EnemyController : MonoBehaviour
             return;
 
         // Create a multiplier for the difficulty
-        float difficultyMultiplier = ButtonStateManager.IsMasterButtonFilled 
-            ? MasterDetectionRangeMultiplier 
+        float difficultyMultiplier = ButtonStateManager.IsMasterButtonFilled
+            ? MasterDetectionRangeMultiplier
             : 1;
 
         // If the player is not within range, return
@@ -419,11 +435,11 @@ public class EnemyController : MonoBehaviour
         // Fire the projectile        
         enemyProjectileScript.Fire(this, transform.forward);
 
-        
+        // Play the fire audio
+        _audioSource.PlayOneShot(_fireAudioClip);
+
         // Start the reset can shoot coroutine
         StartCoroutine(ResetCanShoot());
-
-        Debug.Log("ENEMY SHOT");
     }
 
     // Coroutine to reset the can shoot variable
@@ -433,12 +449,11 @@ public class EnemyController : MonoBehaviour
 
         // 70 bullets / 1 minute * 1 minute / 60 seconds = 70 bullets / 60 seconds = 7 / 6 bullets / second
 
-        float difficultyMultiplier = ButtonStateManager.IsMasterButtonFilled 
-            ? MasterFireRateMultiplier 
+        float difficultyMultiplier = ButtonStateManager.IsMasterButtonFilled
+            ? MasterFireRateMultiplier
             : 1;
-        
+
         float bulletsPerSecond = (_fireRate * difficultyMultiplier) / 60f;
-        Debug.Log($"Master Button Filled: {difficultyMultiplier} {bulletsPerSecond}");
 
         // Wait for the cooldown time
         yield return new WaitForSeconds(1 / bulletsPerSecond);

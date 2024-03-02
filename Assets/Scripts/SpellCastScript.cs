@@ -78,7 +78,7 @@ public class SpellCastScript : MonoBehaviour
         
         // Pick up a freeze spell by default
         // ! TODO: Change to None when the game is ready to be played
-        PickUpSpell(SpellCastType.Freeze);
+        PickUpSpell(SpellCastType.Invisibility);
     }
 
     // Update is called once per frame

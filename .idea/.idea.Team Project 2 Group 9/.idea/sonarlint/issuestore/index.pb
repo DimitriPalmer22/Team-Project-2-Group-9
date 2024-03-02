@@ -13,10 +13,6 @@ G
 Assets/Scripts/Actor.cs,f\9\f9d006b0f3803849405b2d89277ce4990cb2188e
 M
 Assets/Scripts/ActorPlayer.cs,4\1\418b5dfacbc3c01038066563c8055a3e270c9c25
-L
-Assets/Scripts/ActroEnemy.cs,6\4\648869cb00da2df4639955d6b71a082feefb0412
-M
-Assets/Scripts/LevelScript.cs,e\9\e9f9d5befc2543c03dee0c52c3c8a491d9e66368
 N
 Assets/Scripts/GlobalScript.cs,5\1\51469e614e3f258ce097f5eb06c853a25ee2857a
 Q

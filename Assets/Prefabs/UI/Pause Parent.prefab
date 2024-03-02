@@ -884,12 +884,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+        m_TargetAssemblyTypeName: GlobalScript, Assembly-CSharp
+        m_MethodName: ReturnToMainMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -2014,7 +2014,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6236976595566270073
 Transform:
   m_ObjectHideFlags: 0
@@ -2409,7 +2409,7 @@ MonoBehaviour:
     without having to worry about
     guards
 
-    detecting you.'
+    damaging you.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b8bd1d34bc13b7b4fb70582c1252e97f, type: 2}
   m_sharedMaterial: {fileID: 3165087109914004049, guid: b8bd1d34bc13b7b4fb70582c1252e97f, type: 2}
@@ -2601,8 +2601,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: AnimationsManager, Assembly-CSharp
-        m_MethodName: OnAboutClicked
+        m_TargetAssemblyTypeName: GlobalScript, Assembly-CSharp
+        m_MethodName: UnpauseGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

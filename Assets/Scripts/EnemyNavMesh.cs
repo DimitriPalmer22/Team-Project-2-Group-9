@@ -49,6 +49,8 @@ public class EnemyNavMesh : MonoBehaviour
     /// </summary>
     private EnemyPatrolState PatrolState => _enemyController.PatrolState;
 
+    private bool WillNavigateIfAble => !_enemyController.IsFrozen;
+    
     #endregion
     
     #region Unity Methods
@@ -112,8 +114,8 @@ public class EnemyNavMesh : MonoBehaviour
         if (PatrolState != EnemyPatrolState.Chase)
             return;
 
-        // enable the nav mesh agent
-        _navMeshAgent.enabled = true;
+        // enable the nav mesh agent if not frozen
+        _navMeshAgent.enabled = WillNavigateIfAble;
         
         // set the navigation target to the player's transform
         _navigationTarget = _enemyController.TargetPlayer.transform;
@@ -142,8 +144,8 @@ public class EnemyNavMesh : MonoBehaviour
         if (_patrolCheckpoints.Length == 0)
             return;
         
-        // enable the nav mesh agent
-        _navMeshAgent.enabled = true;
+        // enable the nav mesh agent if not frozen
+        _navMeshAgent.enabled = WillNavigateIfAble;
         
         // modulus the current patrol index by the length of the patrol checkpoints array (Avoid IndexOutOfRangeException)
         _currentPatrolIndex %= _patrolCheckpoints.Length;
@@ -162,8 +164,8 @@ public class EnemyNavMesh : MonoBehaviour
         if (PatrolState != EnemyPatrolState.Lost)
             return;
         
-        // enable the nav mesh agent
-        _navMeshAgent.enabled = true;
+        // enable the nav mesh agent if not frozen
+        _navMeshAgent.enabled = WillNavigateIfAble;
         
         // if the enemy is lost, navigate to the last known player position
         _navMeshAgent.destination = _enemyController.LastKnownPlayerPosition;
@@ -180,8 +182,8 @@ public class EnemyNavMesh : MonoBehaviour
         if (PatrolState != EnemyPatrolState.Investigate)
             return;
 
-        // enable the nav mesh agent
-        _navMeshAgent.enabled = true;
+        // enable the nav mesh agent if not frozen
+        _navMeshAgent.enabled = WillNavigateIfAble;
         
         // set the navigation target to the player's transform
         _navigationTarget = _enemyController.TargetPlayer.transform;

@@ -85,6 +85,10 @@ public class EnemyController : MonoBehaviour
     /// </summary>
     public Vector3 LastKnownPlayerPosition => _lastKnownPlayerPosition;
     
+    /// <summary>
+    /// Is the enemy frozen
+    /// </summary>
+    public bool IsFrozen => _isFrozen;
 
     #endregion
     

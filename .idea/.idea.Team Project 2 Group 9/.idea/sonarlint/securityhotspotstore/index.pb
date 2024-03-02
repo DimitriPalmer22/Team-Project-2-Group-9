@@ -29,3 +29,5 @@ L
 Assets/Scripts/ActorEnemy.cs,0\b\0b3d6f30b4328993ccc8eb82a619f91888f67216
 R
 "Assets/Scripts/PlayButtonScript.cs,b\0\b02784367fdcbb6fdf074a1e60911716df902968
+X
+(Assets/Scripts/FreezeProjectileScript.cs,b\9\b9589f2d29abeeff68dfb6d02c55da945d52629e

@@ -42,6 +42,7 @@ public class SpellCastScript : MonoBehaviour
     private bool _isSpellActive;
 
     [Header("Freeze Spell")]
+    [SerializeField] private GameObject _freezePrefab;
     [SerializeField] private AudioSource _freezeSource;
     [SerializeField] private ParticleSystem _freezeParticles;
     
@@ -78,7 +79,7 @@ public class SpellCastScript : MonoBehaviour
         
         // Pick up a freeze spell by default
         // ! TODO: Change to None when the game is ready to be played
-        PickUpSpell(SpellCastType.Invisibility);
+        PickUpSpell(SpellCastType.Freeze);
     }
 
     // Update is called once per frame
@@ -150,11 +151,14 @@ public class SpellCastScript : MonoBehaviour
             case SpellCastType.Freeze:
                 // Apply the freeze effect
                 
-                // Get the enemy controller
-                EnemyController enemyController = GameObject.FindWithTag("Enemy").GetComponent<EnemyController>();
+                // Instantiate the freeze projectile
+                var freezeProjectile = Instantiate(_freezePrefab, transform.position, Quaternion.identity);
 
-                // Freeze the enemy 
-                StartCoroutine(FreezeEnemy(enemyController));
+                // Get the freeze projectile script
+                var freezeProjectileScript = freezeProjectile.GetComponent<FreezeProjectileScript>();
+                
+                // Fire the freeze projectile
+                freezeProjectileScript.Fire(this, _camera.transform.forward);
                 
                 // Play the freeze sound
                 _freezeSource.Play();
@@ -303,7 +307,7 @@ public class SpellCastScript : MonoBehaviour
     /// </summary>
     /// <param name="enemyController"></param>
     /// <returns></returns>
-    private IEnumerator FreezeEnemy(EnemyController enemyController)
+    public IEnumerator FreezeEnemy(EnemyController enemyController)
     {
         // if enemyController is null, return
         if (enemyController == null)

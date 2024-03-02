@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class ActorPlayer : Actor
 {
+
+    [Header("Hit Audio")]
+
+    [SerializeField] private AudioSource _hitAudioSource;
+    
+    [SerializeField] private AudioClip _hitAudioClip;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -23,6 +30,12 @@ public class ActorPlayer : Actor
             return;
         
         base.ChangeHealth(amount);
+
+        if (amount < 0 && _hitAudioSource != null)
+        {
+            // Play the hit audio
+            _hitAudioSource.PlayOneShot(_hitAudioClip);
+        }
     }
 
     protected override void Die()

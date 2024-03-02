@@ -398,6 +398,17 @@ Transform:
   m_Father: {fileID: 974953161}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &573138352 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7437577807905477065, guid: e6f90bc24a68a7145985e74f6eebea6e, type: 3}
+  m_PrefabInstance: {fileID: 2086627895}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &623002071
 GameObject:
   m_ObjectHideFlags: 0
@@ -636,6 +647,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1862460707343782923, guid: 6dbc92241002bc443b755446acba3ea6, type: 3}
+      propertyPath: _freezeClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 3ae1e3c8d0c9ef349a11f6cc20ac28e0, type: 3}
+    - target: {fileID: 1862460707343782923, guid: 6dbc92241002bc443b755446acba3ea6, type: 3}
+      propertyPath: _invisibilityClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 6f605bf254ebf054392a97f74d7efae8, type: 3}
     - target: {fileID: 1862460707343782931, guid: 6dbc92241002bc443b755446acba3ea6, type: 3}
       propertyPath: m_Name
       value: Player
@@ -697,9 +716,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1435440634}
     - target: {fileID: 3363062338638293927, guid: 6dbc92241002bc443b755446acba3ea6, type: 3}
+      propertyPath: _masterNoviceText
+      value: 
+      objectReference: {fileID: 573138352}
+    - target: {fileID: 3363062338638293927, guid: 6dbc92241002bc443b755446acba3ea6, type: 3}
       propertyPath: _spellDurationText
       value: 
       objectReference: {fileID: 1417595016}
+    - target: {fileID: 4778952202017153315, guid: 6dbc92241002bc443b755446acba3ea6, type: 3}
+      propertyPath: _hitAudioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 4f0e35e37d7f73e4ea3ffb2180471c66, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6dbc92241002bc443b755446acba3ea6, type: 3}
 --- !u!114 &1417595016 stripped
@@ -1128,6 +1155,18 @@ PrefabInstance:
       propertyPath: m_HorizontalAlignment
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 3022876475113200726, guid: e6f90bc24a68a7145985e74f6eebea6e, type: 3}
+      propertyPath: winMusic
+      value: 
+      objectReference: {fileID: 8300000, guid: 776f6fd753097d448b480a43544ac191, type: 3}
+    - target: {fileID: 3022876475113200726, guid: e6f90bc24a68a7145985e74f6eebea6e, type: 3}
+      propertyPath: loseMusic
+      value: 
+      objectReference: {fileID: 8300000, guid: 07936a1766d0ad94dae533b89fa77467, type: 3}
+    - target: {fileID: 3022876475113200726, guid: e6f90bc24a68a7145985e74f6eebea6e, type: 3}
+      propertyPath: backgroundMusic
+      value: 
+      objectReference: {fileID: 8300000, guid: de42af01e5405514d99ae4c74c97b4fb, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e6f90bc24a68a7145985e74f6eebea6e, type: 3}
 --- !u!1001 &3251902768667977065

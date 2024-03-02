@@ -5060,7 +5060,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dafea9f55e93e4948b8289a35559c620, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 12
+  speed: 8
   mouseSensitivity: 500
 --- !u!114 &1862460707343782923
 MonoBehaviour:
@@ -5103,6 +5103,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d3d68840250141449bde9ccc26a8db1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _healthText: {fileID: 0}
+  _spellInfoText: {fileID: 0}
+  _spellDurationText: {fileID: 0}
+  _pickupText: {fileID: 0}
 --- !u!1 &1862460708211063117
 GameObject:
   m_ObjectHideFlags: 0

@@ -13,13 +13,16 @@ public class ActorPlayer : Actor
     // Update is called once per frame
     void Update()
     {
-        // TODO: Delete later
         
-        if (Input.GetKeyDown(KeyCode.U))
-            ChangeHealth(-1);
+    }
+
+    public override void ChangeHealth(int amount)
+    {
+        // If the novice button is filled, the player cannot lose health
+        if (ButtonStateManager.IsNoviceButtonFilled)
+            return;
         
-        if (Input.GetKeyDown(KeyCode.I))
-            ChangeHealth(1);
+        base.ChangeHealth(amount);
     }
 
     protected override void Die()

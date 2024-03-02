@@ -52,7 +52,7 @@ public abstract class Actor : MonoBehaviour
     
     #region Methods
 
-    public void ChangeHealth(int amount)
+    public virtual void ChangeHealth(int amount)
     {
         _currentHealth = Mathf.Clamp(_currentHealth + amount, 0, _maxHealth);
 

@@ -488,9 +488,9 @@ MonoBehaviour:
 
     D
 
-    E
+    F
 
-    F'
+    E'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b8bd1d34bc13b7b4fb70582c1252e97f, type: 2}
   m_sharedMaterial: {fileID: 3165087109914004049, guid: b8bd1d34bc13b7b4fb70582c1252e97f, type: 2}

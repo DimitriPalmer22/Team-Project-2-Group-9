@@ -48,7 +48,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -144,9 +144,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bb27059b27165a4296b4ac676fca1c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  backgroundMusic: {fileID: 0}
-  winMusic: {fileID: 0}
-  loseMusic: {fileID: 0}
+  backgroundMusic: {fileID: 8300000, guid: 46a3b1aed01fcbe45a18152bd23d9635, type: 3}
+  winMusic: {fileID: 8300000, guid: bff83c010abf000468515c9df9bfb2a6, type: 3}
+  loseMusic: {fileID: 8300000, guid: 07936a1766d0ad94dae533b89fa77467, type: 3}
   _musicSource: {fileID: 1022157683356476345}
   winScreen: {fileID: 6282961778973487791}
   loseScreen: {fileID: 6282961779670748728}

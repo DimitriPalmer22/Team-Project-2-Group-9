@@ -130,6 +130,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 966647899401464452, guid: 106d52e458d0a4d4f949b2a2f6b88424, type: 3}
+      propertyPath: _patrolCheckpoints.Array.data[0]
+      value: 
+      objectReference: {fileID: 1642792635}
+    - target: {fileID: 966647899401464452, guid: 106d52e458d0a4d4f949b2a2f6b88424, type: 3}
+      propertyPath: _patrolCheckpoints.Array.data[1]
+      value: 
+      objectReference: {fileID: 507235317}
+    - target: {fileID: 966647899401464452, guid: 106d52e458d0a4d4f949b2a2f6b88424, type: 3}
+      propertyPath: _patrolCheckpoints.Array.data[2]
+      value: 
+      objectReference: {fileID: 623002072}
+    - target: {fileID: 966647899401464452, guid: 106d52e458d0a4d4f949b2a2f6b88424, type: 3}
+      propertyPath: _patrolCheckpoints.Array.data[3]
+      value: 
+      objectReference: {fileID: 184374090}
+    - target: {fileID: 966647899401464452, guid: 106d52e458d0a4d4f949b2a2f6b88424, type: 3}
+      propertyPath: _patrolCheckpoints.Array.data[4]
+      value: 
+      objectReference: {fileID: 1725984028}
     - target: {fileID: 4814190719251190987, guid: 106d52e458d0a4d4f949b2a2f6b88424, type: 3}
       propertyPath: m_Name
       value: Test Enemy
@@ -180,51 +200,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 106d52e458d0a4d4f949b2a2f6b88424, type: 3}
---- !u!1 &20089846 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4814190719251190987, guid: 106d52e458d0a4d4f949b2a2f6b88424, type: 3}
-  m_PrefabInstance: {fileID: 20089845}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &20089847
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 20089846}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c1aaa6e9da7c714db29f5f48d13c735, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _patrolCheckpoints:
-  - {fileID: 1642792635}
-  - {fileID: 507235317}
-  - {fileID: 623002072}
-  - {fileID: 184374090}
-  - {fileID: 1725984028}
---- !u!195 &20089848
-NavMeshAgent:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 20089846}
-  m_Enabled: 1
-  m_AgentTypeID: 0
-  m_Radius: 0.5
-  m_Speed: 3.5
-  m_Acceleration: 8
-  avoidancePriority: 50
-  m_AngularSpeed: 720
-  m_StoppingDistance: 0
-  m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
-  m_AutoRepath: 1
-  m_Height: 2
-  m_BaseOffset: 1
-  m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
 --- !u!1 &184374089
 GameObject:
   m_ObjectHideFlags: 0
@@ -647,14 +622,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1862460707343782923, guid: 6dbc92241002bc443b755446acba3ea6, type: 3}
-      propertyPath: _freezeClip
-      value: 
-      objectReference: {fileID: 8300000, guid: 3ae1e3c8d0c9ef349a11f6cc20ac28e0, type: 3}
-    - target: {fileID: 1862460707343782923, guid: 6dbc92241002bc443b755446acba3ea6, type: 3}
-      propertyPath: _invisibilityClip
-      value: 
-      objectReference: {fileID: 8300000, guid: 6f605bf254ebf054392a97f74d7efae8, type: 3}
     - target: {fileID: 1862460707343782931, guid: 6dbc92241002bc443b755446acba3ea6, type: 3}
       propertyPath: m_Name
       value: Player
@@ -723,10 +690,6 @@ PrefabInstance:
       propertyPath: _spellDurationText
       value: 
       objectReference: {fileID: 1417595016}
-    - target: {fileID: 4778952202017153315, guid: 6dbc92241002bc443b755446acba3ea6, type: 3}
-      propertyPath: _hitAudioClip
-      value: 
-      objectReference: {fileID: 8300000, guid: 4f0e35e37d7f73e4ea3ffb2180471c66, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6dbc92241002bc443b755446acba3ea6, type: 3}
 --- !u!114 &1417595016 stripped
@@ -1155,18 +1118,6 @@ PrefabInstance:
       propertyPath: m_HorizontalAlignment
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 3022876475113200726, guid: e6f90bc24a68a7145985e74f6eebea6e, type: 3}
-      propertyPath: winMusic
-      value: 
-      objectReference: {fileID: 8300000, guid: 776f6fd753097d448b480a43544ac191, type: 3}
-    - target: {fileID: 3022876475113200726, guid: e6f90bc24a68a7145985e74f6eebea6e, type: 3}
-      propertyPath: loseMusic
-      value: 
-      objectReference: {fileID: 8300000, guid: 07936a1766d0ad94dae533b89fa77467, type: 3}
-    - target: {fileID: 3022876475113200726, guid: e6f90bc24a68a7145985e74f6eebea6e, type: 3}
-      propertyPath: backgroundMusic
-      value: 
-      objectReference: {fileID: 8300000, guid: de42af01e5405514d99ae4c74c97b4fb, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e6f90bc24a68a7145985e74f6eebea6e, type: 3}
 --- !u!1001 &3251902768667977065

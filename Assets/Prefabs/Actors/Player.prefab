@@ -5050,7 +5050,7 @@ MonoBehaviour:
   _maxHealth: 3
   _currentHealth: 3
   _hitAudioSource: {fileID: 1215752438642294037}
-  _hitAudioClip: {fileID: 0}
+  _hitAudioClip: {fileID: 8300000, guid: 5affbd48531b5d643be0fa5b2bfe22b7, type: 3}
 --- !u!114 &1862460707343782928
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5079,8 +5079,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _freezePrefab: {fileID: 7871647701971169757, guid: f8095d76e750270428f6ee5186dd2a85, type: 3}
   _freezeSource: {fileID: 6665510097192490672}
+  _freezeClip: {fileID: 8300000, guid: c98e3c335aad9d24d9ed18c70b646bf9, type: 3}
   _freezeParticles: {fileID: 8365854022687534885}
   _invisibilitySource: {fileID: 1327477643833660490}
+  _invisibilityClip: {fileID: 8300000, guid: 5ba2ac8b49bb94145b2a01f96801385a, type: 3}
   _invisibilityParticles: {fileID: 8506856878967451121}
 --- !u!114 &1862460707343782922
 MonoBehaviour:

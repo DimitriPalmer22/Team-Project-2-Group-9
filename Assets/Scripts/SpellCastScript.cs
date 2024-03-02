@@ -13,6 +13,12 @@ public class SpellCastScript : MonoBehaviour
     /// </summary>
     private const float FreezeDuration = 3;
     
+    // The distance from which the player can pick up a spell
+    public const float PickupDistance = 3;
+
+    // The number of particles to emit
+    private const int ParticlesAmount = 200;
+    
     #region Fields
     
     /// <summary>
@@ -34,9 +40,15 @@ public class SpellCastScript : MonoBehaviour
     /// Boolean to determine if the spell is currently active
     /// </summary>
     private bool _isSpellActive;
+
+    [Header("Freeze Spell")]
+    [SerializeField] private GameObject _freezePrefab;
+    [SerializeField] private AudioSource _freezeSource;
+    [SerializeField] private ParticleSystem _freezeParticles;
     
-    // The distance from which the player can pick up a spell
-    public const float PickupDistance = 3;
+    [Header("Invisibility Spell")]
+    [SerializeField] private AudioSource _invisibilitySource;
+    [SerializeField] private ParticleSystem _invisibilityParticles;
     
     // The camera
     private Camera _camera;
@@ -45,7 +57,15 @@ public class SpellCastScript : MonoBehaviour
     
     #region Properties
     
+    public SpellCastType SpellType => _spellType;
+    
+    public int RemainingUses => _remainingUses;
+    
     public bool IsInvisible => _spellType == SpellCastType.Invisibility && _isSpellActive;
+    
+    public float RemainingDuration => _spellEffectRemaining;
+    
+    public bool IsSpellActive => _isSpellActive;
     
     #endregion Properties
     
@@ -67,7 +87,7 @@ public class SpellCastScript : MonoBehaviour
         
         // Pick up a freeze spell by default
         // ! TODO: Change to None when the game is ready to be played
-        PickUpSpell(SpellCastType.Freeze);
+        PickUpSpell(SpellCastType.Invisibility);
     }
 
     // Update is called once per frame
@@ -84,13 +104,11 @@ public class SpellCastScript : MonoBehaviour
             // if the spell's effect has expired, deactivate the spell
             if (_spellEffectRemaining <= 0)
                 DeactivateSpell();
-            
-            // if the spell is a duration spell, Debug Log the remaining duration of the spell
-            if (_spellType.IsDurationSpellType())
-                Debug.Log($"Spell effect remaining: {_spellEffectRemaining}");
         }
     }
 
+    #region Methods
+    
     /// <summary>
     /// Read the player's input
     /// </summary>
@@ -137,20 +155,33 @@ public class SpellCastScript : MonoBehaviour
             case SpellCastType.Freeze:
                 // Apply the freeze effect
                 
-                // Get the enemy controller
-                EnemyController enemyController = GameObject.FindWithTag("Enemy").GetComponent<EnemyController>();
+                // Instantiate the freeze projectile
+                var freezeProjectile = Instantiate(_freezePrefab, _camera.transform.position, Quaternion.identity);
 
-                // Freeze the enemy 
-                StartCoroutine(FreezeEnemy(enemyController));
+                // Get the freeze projectile script
+                var freezeProjectileScript = freezeProjectile.GetComponent<FreezeProjectileScript>();
+                
+                // Fire the freeze projectile
+                freezeProjectileScript.Fire(this, _camera.transform.forward);
+                
+                // Play the freeze sound
+                _freezeSource.Play();
+                
+                // TODO: Play the freeze particles
+                _freezeParticles.Emit(ParticlesAmount);
+                
                 break;
             
             // Invisibility spell
             case SpellCastType.Invisibility:
                 // Apply the invisibility effect
-                break;
-            
-            // Teleport spell
-            case SpellCastType.Teleport:
+                
+                // Play the invisibility sound
+                _invisibilitySource.Play();
+                
+                // TODO: Play the invisibility particles
+                _invisibilityParticles.Emit(ParticlesAmount);
+                
                 break;
             
             default:
@@ -280,7 +311,7 @@ public class SpellCastScript : MonoBehaviour
     /// </summary>
     /// <param name="enemyController"></param>
     /// <returns></returns>
-    private IEnumerator FreezeEnemy(EnemyController enemyController)
+    public IEnumerator FreezeEnemy(EnemyController enemyController)
     {
         // if enemyController is null, return
         if (enemyController == null)
@@ -301,5 +332,7 @@ public class SpellCastScript : MonoBehaviour
         // Debug Log that the enemy is unfrozen
         Debug.Log("Unfreezing the enemy");
     }
+    
+    #endregion
     
 }

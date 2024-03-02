@@ -10,9 +10,13 @@ public class EnemyProjectileScript : MonoBehaviour
 
     // The maximum lifetime of the projectile
     private const float MaxLifetime = 3f;
+
+    // The speed multiplier for the projectile during master mode
+    private const float MasterSpeedMultiplier = 1.25f;
     
     // The speed of the projectile
     [SerializeField] private float Speed;
+
     
     // The direction the projectile is moving
     private Vector3 _direction;
@@ -78,13 +82,17 @@ public class EnemyProjectileScript : MonoBehaviour
         _enemyControllerScript = enemyControllerScript;
         
         // set the direction
-        _direction = direction;
+        _direction = direction.normalized;
     }
 
     public void UpdatePosition()
     {
+        float difficultyMultiplier = ButtonStateManager.IsMasterButtonFilled 
+            ? MasterSpeedMultiplier 
+            : 1;
+        
         // move the projectile
-        transform.position += _direction * Speed * Time.deltaTime;
+        transform.position += _direction * (Speed * difficultyMultiplier) * Time.deltaTime;
         
         // Rotate the projectile to make it look like it's spinning
         transform.Rotate(Vector3.one, RotationsPerSecond * 360 * Time.deltaTime);

@@ -104,10 +104,6 @@ public class SpellCastScript : MonoBehaviour
             // if the spell's effect has expired, deactivate the spell
             if (_spellEffectRemaining <= 0)
                 DeactivateSpell();
-            
-            // if the spell is a duration spell, Debug Log the remaining duration of the spell
-            if (_spellType.IsDurationSpellType())
-                Debug.Log($"Spell effect remaining: {_spellEffectRemaining}");
         }
     }
 

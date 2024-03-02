@@ -15,6 +15,17 @@ public class EnemyController : MonoBehaviour
     /// </summary>
     private const float InvestigationTime = 1.5f;
 
+    #region Master Mode
+
+    private const float MasterDetectionMultiplier = .75f;
+
+    private const float MasterDetectionRangeMultiplier = 1.5f;
+    
+    private const float MasterFireRateMultiplier = 2f;
+
+    #endregion
+
+    
     #region Fields
 
     /// <summary>
@@ -186,9 +197,13 @@ public class EnemyController : MonoBehaviour
     /// <returns></returns>
     private bool IsPlayerVisible(GameObject player)
     {
+        float difficultyMultiplier = ButtonStateManager.IsMasterButtonFilled 
+            ? MasterDetectionRangeMultiplier 
+            : 1;
+        
         // Cast a ray from the enemy to the player
         var rayHit = Physics.Raycast(transform.position, player.transform.position - transform.position,
-            out RaycastHit hit, visionRange);
+            out RaycastHit hit, visionRange * difficultyMultiplier);
 
         // If the ray hits something, check if it's the player
         if (!rayHit)
@@ -227,8 +242,14 @@ public class EnemyController : MonoBehaviour
                 // // If the player is visible, reset the time since the player was last seen
                 // _timeSincePlayerLastSeen = 0;
 
+
+                // Create a multiplier for the difficulty
+                float difficultyMultiplier = ButtonStateManager.IsMasterButtonFilled 
+                    ? MasterDetectionMultiplier 
+                    : 1;
+                
                 // If the player is visible, increment and clamp the time investigating
-                _timeInvestigating = Mathf.Clamp(_timeInvestigating + Time.deltaTime, 0, InvestigationTime);
+                _timeInvestigating = Mathf.Clamp(_timeInvestigating + (Time.deltaTime * difficultyMultiplier), 0, InvestigationTime);
 
                 // If the enemy is currently losing the target, immediately finish investigating
                 if (_losingTarget && _wasChasingBeforeLosing)
@@ -244,8 +265,13 @@ public class EnemyController : MonoBehaviour
             }
             else
             {
+                // Create a multiplier for the difficulty (divide this time)
+                float difficultyMultiplier = ButtonStateManager.IsMasterButtonFilled 
+                    ? MasterDetectionMultiplier 
+                    : 1;
+                
                 // If the player is not visible, decrement the time investigating
-                _timeInvestigating = Mathf.Clamp(_timeInvestigating - Time.deltaTime, 0, InvestigationTime);
+                _timeInvestigating = Mathf.Clamp(_timeInvestigating - (Time.deltaTime / difficultyMultiplier), 0, InvestigationTime);
 
                 _losingTarget = true;
 
@@ -368,8 +394,13 @@ public class EnemyController : MonoBehaviour
         if (!IsPlayerVisible(_targetPlayer))
             return;
 
+        // Create a multiplier for the difficulty
+        float difficultyMultiplier = ButtonStateManager.IsMasterButtonFilled 
+            ? MasterDetectionRangeMultiplier 
+            : 1;
+
         // If the player is not within range, return
-        if (Vector3.Distance(transform.position, _targetPlayer.transform.position) > visionRange)
+        if (Vector3.Distance(transform.position, _targetPlayer.transform.position) > visionRange * difficultyMultiplier)
             return;
 
         // If the enemy cannot shoot, return
@@ -387,10 +418,11 @@ public class EnemyController : MonoBehaviour
 
         // Fire the projectile        
         enemyProjectileScript.Fire(this, transform.forward);
+
         
         // Start the reset can shoot coroutine
         StartCoroutine(ResetCanShoot());
-        
+
         Debug.Log("ENEMY SHOT");
     }
 
@@ -401,8 +433,15 @@ public class EnemyController : MonoBehaviour
 
         // 70 bullets / 1 minute * 1 minute / 60 seconds = 70 bullets / 60 seconds = 7 / 6 bullets / second
 
+        float difficultyMultiplier = ButtonStateManager.IsMasterButtonFilled 
+            ? MasterFireRateMultiplier 
+            : 1;
+        
+        float bulletsPerSecond = (_fireRate * difficultyMultiplier) / 60f;
+        Debug.Log($"Master Button Filled: {difficultyMultiplier} {bulletsPerSecond}");
+
         // Wait for the cooldown time
-        yield return new WaitForSeconds(1 / (_fireRate / 60f));
+        yield return new WaitForSeconds(1 / bulletsPerSecond);
 
         // Set can shoot to true
         _canShoot = true;

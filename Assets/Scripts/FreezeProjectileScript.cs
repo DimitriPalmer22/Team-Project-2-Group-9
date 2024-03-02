@@ -76,7 +76,7 @@ public class FreezeProjectileScript : MonoBehaviour
         _spellCastScript = spellCastScript;
         
         // set the direction
-        _direction = direction;
+        _direction = direction.normalized;
     }
 
     public void UpdatePosition()

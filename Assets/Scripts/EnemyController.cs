@@ -108,6 +108,8 @@ public class EnemyController : MonoBehaviour
     /// Is the enemy frozen
     /// </summary>
     public bool IsFrozen => _isFrozen;
+    
+    public float SpottingProgress => _timeInvestigating / InvestigationTime;
 
     #endregion
 

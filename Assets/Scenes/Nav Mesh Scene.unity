@@ -150,6 +150,18 @@ PrefabInstance:
       propertyPath: _patrolCheckpoints.Array.data[4]
       value: 
       objectReference: {fileID: 1725984028}
+    - target: {fileID: 981015237152795763, guid: 106d52e458d0a4d4f949b2a2f6b88424, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2575959967373789663, guid: 106d52e458d0a4d4f949b2a2f6b88424, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2575959967373789663, guid: 106d52e458d0a4d4f949b2a2f6b88424, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4814190719251190987, guid: 106d52e458d0a4d4f949b2a2f6b88424, type: 3}
       propertyPath: m_Name
       value: Test Enemy
@@ -196,6 +208,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4814190719251190991, guid: 106d52e458d0a4d4f949b2a2f6b88424, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8000076433611964692, guid: 106d52e458d0a4d4f949b2a2f6b88424, type: 3}
+      propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

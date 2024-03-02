@@ -116,6 +116,8 @@ public class EnemyNavMesh : MonoBehaviour
 
         // enable the nav mesh agent if not frozen
         _navMeshAgent.enabled = WillNavigateIfAble;
+        if (!_navMeshAgent.enabled)
+            return;
         
         // set the navigation target to the player's transform
         _navigationTarget = _enemyController.TargetPlayer.transform;
@@ -146,6 +148,8 @@ public class EnemyNavMesh : MonoBehaviour
         
         // enable the nav mesh agent if not frozen
         _navMeshAgent.enabled = WillNavigateIfAble;
+        if (!_navMeshAgent.enabled)
+            return;
         
         // modulus the current patrol index by the length of the patrol checkpoints array (Avoid IndexOutOfRangeException)
         _currentPatrolIndex %= _patrolCheckpoints.Length;
@@ -166,6 +170,8 @@ public class EnemyNavMesh : MonoBehaviour
         
         // enable the nav mesh agent if not frozen
         _navMeshAgent.enabled = WillNavigateIfAble;
+        if (!_navMeshAgent.enabled)
+            return;
         
         // if the enemy is lost, navigate to the last known player position
         _navMeshAgent.destination = _enemyController.LastKnownPlayerPosition;
@@ -184,6 +190,8 @@ public class EnemyNavMesh : MonoBehaviour
 
         // enable the nav mesh agent if not frozen
         _navMeshAgent.enabled = WillNavigateIfAble;
+        if (!_navMeshAgent.enabled)
+            return;
         
         // set the navigation target to the player's transform
         _navigationTarget = _enemyController.TargetPlayer.transform;
@@ -219,8 +227,8 @@ public class EnemyNavMesh : MonoBehaviour
             }
         }
         
-        // set the current patrol index to the nearest index
-        _currentPatrolIndex = nearestIndex;
+        // set the current patrol index to the nearest index's next index
+        _currentPatrolIndex = nearestIndex + 1;
     }
 
     #endregion

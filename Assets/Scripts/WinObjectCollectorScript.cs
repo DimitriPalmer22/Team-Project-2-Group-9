@@ -36,9 +36,6 @@ public class WinObjectCollectorScript : MonoBehaviour
         // If the player presses the pickup spell button, pick up the win object
         if (Input.GetKeyDown(SpellCastScript.PickupSpellKey))
         {
-            // Debug log that the player is attempting to pick up a win object
-            Debug.Log("Attempting to pick up win object!");
-            
             // Determine which win object the player is looking at
             DetermineLookedAtWinObject();
             

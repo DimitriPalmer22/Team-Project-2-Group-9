@@ -4922,12 +4922,13 @@ GameObject:
   - component: {fileID: 1862460707343782935}
   - component: {fileID: 1862460707343782934}
   - component: {fileID: 1862460707343782929}
+  - component: {fileID: 4364184534224808487}
   - component: {fileID: 4778952202017153315}
   - component: {fileID: 1862460707343782928}
   - component: {fileID: 1862460707343782923}
   - component: {fileID: 1862460707343782922}
   - component: {fileID: 3363062338638293927}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -5035,6 +5036,28 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!195 &4364184534224808487
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1862460707343782931}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 0
+  m_AutoBraking: 1
+  m_AutoRepath: 0
+  m_Height: 2
+  m_BaseOffset: 1
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!114 &4778952202017153315
 MonoBehaviour:
   m_ObjectHideFlags: 0

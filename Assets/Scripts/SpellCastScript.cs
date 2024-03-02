@@ -86,10 +86,6 @@ public class SpellCastScript : MonoBehaviour
     {
         // Set the camera to the main camera
         _camera = Camera.main;
-        
-        // Pick up a freeze spell by default
-        // ! TODO: Change to None when the game is ready to be played
-        PickUpSpell(SpellCastType.Invisibility);
     }
 
     // Update is called once per frame
@@ -106,6 +102,17 @@ public class SpellCastScript : MonoBehaviour
             // if the spell's effect has expired, deactivate the spell
             if (_spellEffectRemaining <= 0)
                 DeactivateSpell();
+        }
+
+        // If the player has no uses left, set the spell type to none
+        if (_spellType != SpellCastType.None && _remainingUses <= 0)
+        {
+            // if the current spell is not a duration spell
+            if (!_spellType.IsDurationSpellType())
+                _spellType = SpellCastType.None;
+            
+            else if (_spellEffectRemaining <= 0)
+                _spellType = SpellCastType.None;
         }
     }
 
@@ -130,12 +137,6 @@ public class SpellCastScript : MonoBehaviour
             if (spellPickupScript != null)
                 spellPickupScript.PickUpSpell(this);
         }
-        
-        // If the player presses L, pick up a freeze spell
-        // TODO: DELETE THIS LINE LATER
-        // ! @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-        if (Input.GetKeyDown(KeyCode.L))
-            PickUpSpell(SpellCastType.Freeze);
         
     }
     

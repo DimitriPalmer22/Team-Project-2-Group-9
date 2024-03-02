@@ -152,7 +152,7 @@ public class SpellCastScript : MonoBehaviour
                 // Apply the freeze effect
                 
                 // Instantiate the freeze projectile
-                var freezeProjectile = Instantiate(_freezePrefab, transform.position, Quaternion.identity);
+                var freezeProjectile = Instantiate(_freezePrefab, _camera.transform.position, Quaternion.identity);
 
                 // Get the freeze projectile script
                 var freezeProjectileScript = freezeProjectile.GetComponent<FreezeProjectileScript>();

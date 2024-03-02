@@ -48,6 +48,10 @@ public class EnemyProjectileScript : MonoBehaviour
         // Check if the other object is an enemy
         switch (other.gameObject.tag)
         {
+            // If the other object is an enemy, do nothing
+            case "Enemy":
+                return;
+            
             // If the other object is the player, decrement the player's health            
             case "Player":
 

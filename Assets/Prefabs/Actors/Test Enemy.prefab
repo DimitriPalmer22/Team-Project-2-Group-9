@@ -213,3 +213,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   visionRange: 10
+  _projectilePrefab: {fileID: 3539642101868134856, guid: b115bdfde87963346918382d4a821a6b, type: 3}
+  _fireRate: 30

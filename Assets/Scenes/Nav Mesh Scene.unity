@@ -715,6 +715,10 @@ PrefabInstance:
       propertyPath: _spellDurationText
       value: 
       objectReference: {fileID: 1417595016}
+    - target: {fileID: 4778952202017153315, guid: 6dbc92241002bc443b755446acba3ea6, type: 3}
+      propertyPath: _hitAudioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 4f0e35e37d7f73e4ea3ffb2180471c66, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6dbc92241002bc443b755446acba3ea6, type: 3}
 --- !u!114 &1417595016 stripped

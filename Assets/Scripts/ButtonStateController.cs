@@ -23,6 +23,7 @@ public class ButtonStateController : MonoBehaviour
 
     private void Update()
     {
+        UpdateButtonAppearance();
     }
 
     private void OnEnable()
@@ -33,10 +34,25 @@ public class ButtonStateController : MonoBehaviour
     private void OnButtonClick()
     {
         if (isMasterButton)
+        {
+            // Toggle the master button state
             ButtonStateManager.ToggleMasterButtonState();
+            
+            // If the novice button is filled, force the novice button to be unfilled
+            if (ButtonStateManager.IsNoviceButtonFilled)
+                ButtonStateManager.ToggleNoviceButtonState();
+
+        }
 
         else
+        {
+            // Toggle the novice button state
             ButtonStateManager.ToggleNoviceButtonState();
+
+            // If the master button is filled, force the master button to be unfilled
+            if (ButtonStateManager.IsMasterButtonFilled)
+                ButtonStateManager.ToggleMasterButtonState();
+        }
 
         // Update the button appearance
         UpdateButtonAppearance();

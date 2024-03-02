@@ -116,9 +116,6 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        // TODO: Delete Later
-        ChangeColorBasedOnState();
-
         // If the enemy is frozen, return
         if (_isFrozen)
             return;

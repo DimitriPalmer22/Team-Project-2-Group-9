@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -60,10 +57,8 @@ public class ButtonStateController : MonoBehaviour
 
     private void UpdateButtonAppearance()
     {
-        if (isMasterButton)
-            fillImage.enabled = ButtonStateManager.IsMasterButtonFilled;
-
-        else
-            fillImage.enabled = ButtonStateManager.IsNoviceButtonFilled;
+        fillImage.enabled = (isMasterButton) 
+            ? ButtonStateManager.IsMasterButtonFilled 
+            : ButtonStateManager.IsNoviceButtonFilled;
     }
 }

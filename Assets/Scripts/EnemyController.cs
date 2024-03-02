@@ -1,16 +1,9 @@
-using System;
 using System.Collections;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class EnemyController : MonoBehaviour
 {
-    /// <summary>
-    /// The time it takes for the enemy to lose the player 
-    /// </summary>
-    private const float LosePlayerTime = 3f;
-
     /// <summary>
     /// The time it takes for the enemy to investigate the player & spot them 
     /// </summary>
@@ -32,11 +25,6 @@ public class EnemyController : MonoBehaviour
     /// The target player 
     /// </summary>
     private GameObject _targetPlayer;
-
-    // /// <summary>
-    // /// How long it has been since the player was last seen 
-    // /// </summary>
-    // private float _timeSincePlayerLastSeen;
 
     /// <summary>
     /// The time the enemy has been investigating the player
@@ -124,7 +112,7 @@ public class EnemyController : MonoBehaviour
     #endregion
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         // TODO: Delete Later
         ChangeColorBasedOnState();
@@ -135,9 +123,6 @@ public class EnemyController : MonoBehaviour
 
         // Determine the target player
         DetermineTarget();
-
-        // // Look toward the target player
-        // LookTowardTarget();
 
         // Determine the Patrol State
         DeterminePatrolState();
@@ -172,8 +157,6 @@ public class EnemyController : MonoBehaviour
                 material.color = Color.white;
                 break;
 
-            default:
-                throw new ArgumentOutOfRangeException();
         }
     }
 
@@ -236,70 +219,64 @@ public class EnemyController : MonoBehaviour
         if (_targetPlayer == null)
             LookForNearestPlayer();
 
-        // If the target player is not null
-        if (_targetPlayer != null)
+        // If the target player null, return
+        if (_targetPlayer == null) 
+            return;
+        
+        // check if the player is still visible and save it to a variable
+        bool isPlayerVisible = IsPlayerVisible(_targetPlayer);
+
+        // Update the time since the player was last seen
+        if (isPlayerVisible)
         {
-            // check if the player is still visible and save it to a variable
-            bool isPlayerVisible = IsPlayerVisible(_targetPlayer);
+            // Update the last known position of the player
+            _lastKnownPlayerPosition = _targetPlayer.transform.position;
 
-            // Update the time since the player was last seen
-            if (isPlayerVisible)
+            // Create a multiplier for the difficulty
+            float difficultyMultiplier = ButtonStateManager.IsMasterButtonFilled
+                ? MasterDetectionMultiplier
+                : 1;
+
+            // If the player is visible, increment and clamp the time investigating
+            _timeInvestigating = Mathf.Clamp(_timeInvestigating + (Time.deltaTime * difficultyMultiplier), 0,
+                InvestigationTime);
+
+            // If the enemy is currently losing the target, immediately finish investigating
+            if (_losingTarget && _wasChasingBeforeLosing)
+                _timeInvestigating = InvestigationTime;
+
+            // If the enemy has been investigating for more than the investigation time, 
+            // set was chasing before losing to true
+            if (_timeInvestigating >= InvestigationTime)
+                _wasChasingBeforeLosing = true;
+
+            // If the player is visible, set the losing target player to false
+            _losingTarget = false;
+        }
+        else
+        {
+            // Create a multiplier for the difficulty (divide this time)
+            float difficultyMultiplier = ButtonStateManager.IsMasterButtonFilled
+                ? MasterDetectionMultiplier
+                : 1;
+
+            // If the player is not visible, decrement the time investigating
+            _timeInvestigating = Mathf.Clamp(_timeInvestigating - (Time.deltaTime / difficultyMultiplier), 0,
+                InvestigationTime);
+
+            _losingTarget = true;
+
+            // If the player has been lost for too long, set the target player to null
+            if (_timeInvestigating <= 0)
             {
-                // Update the last known position of the player
-                _lastKnownPlayerPosition = _targetPlayer.transform.position;
-
-                // // If the player is visible, reset the time since the player was last seen
-                // _timeSincePlayerLastSeen = 0;
-
-
-                // Create a multiplier for the difficulty
-                float difficultyMultiplier = ButtonStateManager.IsMasterButtonFilled
-                    ? MasterDetectionMultiplier
-                    : 1;
-
-                // If the player is visible, increment and clamp the time investigating
-                _timeInvestigating = Mathf.Clamp(_timeInvestigating + (Time.deltaTime * difficultyMultiplier), 0,
-                    InvestigationTime);
-
-                // If the enemy is currently losing the target, immediately finish investigating
-                if (_losingTarget && _wasChasingBeforeLosing)
-                    _timeInvestigating = InvestigationTime;
-
-                // If the enemy has been investigating for more than the investigation time, 
-                // set was chasing before losing to true
-                if (_timeInvestigating >= InvestigationTime)
-                    _wasChasingBeforeLosing = true;
-
-                // If the player is visible, set the losing target player to false
+                // If the enemy has fully lost the target, reset losing target to false
                 _losingTarget = false;
-            }
-            else
-            {
-                // Create a multiplier for the difficulty (divide this time)
-                float difficultyMultiplier = ButtonStateManager.IsMasterButtonFilled
-                    ? MasterDetectionMultiplier
-                    : 1;
 
-                // If the player is not visible, decrement the time investigating
-                _timeInvestigating = Mathf.Clamp(_timeInvestigating - (Time.deltaTime / difficultyMultiplier), 0,
-                    InvestigationTime);
+                // reset the target player
+                _targetPlayer = null;
 
-                _losingTarget = true;
-
-                // If the player has been lost for too long, set the target player to null
-                if (_timeInvestigating <= 0)
-                {
-                    // If the enemy has fully lost the target, reset losing target to false
-                    _losingTarget = false;
-
-                    // reset the target player
-                    _targetPlayer = null;
-
-                    // reset was chasing before losing
-                    _wasChasingBeforeLosing = false;
-
-                    // _timeSincePlayerLastSeen = 0;
-                }
+                // reset was chasing before losing
+                _wasChasingBeforeLosing = false;
             }
         }
     }
@@ -314,27 +291,25 @@ public class EnemyController : MonoBehaviour
             return;
         }
 
-        // If the enemy has spotted the player recently
-        if (_timeInvestigating > 0)
-        {
-            // If the enemy has been investigating for more than the investigation time,
-            // set the patrol state to chase
-            if (_timeInvestigating >= InvestigationTime)
-                _patrolState = EnemyPatrolState.Chase;
-
-            // If the enemy has been investigating for less than the investigation time
-
-            // If the enemy is currently losing the player, set the patrol state to lost
-            else if (_losingTarget)
-                _patrolState = EnemyPatrolState.Lost;
-
-            // If the enemy is not losing the player, but their investigation time is less than the investigation time,
-            // then they are investigating
-            else
-                _patrolState = EnemyPatrolState.Investigate;
-
+        // If the enemy has not spotted the player recently, return
+        if (_timeInvestigating <= 0) 
             return;
-        }
+        
+        // If the enemy has been investigating for more than the investigation time,
+        // set the patrol state to chase
+        if (_timeInvestigating >= InvestigationTime)
+            _patrolState = EnemyPatrolState.Chase;
+
+        // The enemy has been investigating for less than the investigation time
+
+        // If the enemy is currently losing the player, set the patrol state to lost
+        else if (_losingTarget)
+            _patrolState = EnemyPatrolState.Lost;
+
+        // If the enemy is not losing the player, but their investigation time is less than the investigation time,
+        // then they are investigating
+        else
+            _patrolState = EnemyPatrolState.Investigate;
     }
 
     /// <summary>
@@ -424,7 +399,7 @@ public class EnemyController : MonoBehaviour
             return;
 
         // Look at the player
-        transform.LookAt(_targetPlayer.transform);
+        LookTowardTarget();
 
         // Instantiate the projectile prefab
         GameObject projectile = Instantiate(_projectilePrefab, transform.position, Quaternion.identity);
@@ -433,7 +408,7 @@ public class EnemyController : MonoBehaviour
         EnemyProjectileScript enemyProjectileScript = projectile.GetComponent<EnemyProjectileScript>();
 
         // Fire the projectile        
-        enemyProjectileScript.Fire(this, transform.forward);
+        enemyProjectileScript.Fire(transform.forward);
 
         // Play the fire audio
         _audioSource.PlayOneShot(_fireAudioClip);

@@ -15,14 +15,14 @@ public class WinObjectCollectorScript : MonoBehaviour
     #region Unity Methods
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         // Set the camera to the main camera
         _camera = Camera.main;
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         UpdateInput();
     }
@@ -33,6 +33,10 @@ public class WinObjectCollectorScript : MonoBehaviour
 
     private void UpdateInput()
     {
+        // Disable input if the game is over
+        if (GlobalScript.Instance.IsGameOver)
+            return;
+        
         // If the player presses the pickup spell button, pick up the win object
         if (Input.GetKeyDown(SpellCastScript.PickupSpellKey))
         {
@@ -52,10 +56,6 @@ public class WinObjectCollectorScript : MonoBehaviour
 
         // Get the camera's transform
         Transform cameraTransform = _camera.transform;
-        
-        // TODO: Change the distance that the player can pick up the win object from
-        
-        // TODO: Consolidate the raycasts into 1 big raycast that checks for both spell pickups and win objects
         
         // RayCast to determine if the player is looking at a GameObject tagged "Spell Pickup"
         var hitAGameObject = Physics.Raycast(

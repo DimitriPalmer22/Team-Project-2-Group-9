@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class FreezeProjectileScript : MonoBehaviour
@@ -24,14 +21,8 @@ public class FreezeProjectileScript : MonoBehaviour
     // The lifetime of the projectile
     private float _lifetime;
     
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         // Update the position of the projectile
         UpdatePosition();
@@ -79,10 +70,10 @@ public class FreezeProjectileScript : MonoBehaviour
         _direction = direction.normalized;
     }
 
-    public void UpdatePosition()
+    private void UpdatePosition()
     {
         // move the projectile
-        transform.position += _direction * Speed * Time.deltaTime;
+        transform.position += _direction * (Speed * Time.deltaTime);
         
         // Rotate the projectile to make it look like it's spinning
         transform.Rotate(Vector3.one, RotationsPerSecond * 360 * Time.deltaTime);

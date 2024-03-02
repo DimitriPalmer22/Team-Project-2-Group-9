@@ -7,12 +7,14 @@ public class PlayerController : MonoBehaviour
     /// <summary>
     /// The speed at which the player moves
     /// </summary>
-    [Header("Player Controller Fields")] public float speed = 12f;
+    [Header("Player Controller Fields")] 
+    [SerializeField] private float speed = 12f;
 
     // Reference to the character controller 
     private CharacterController _controller;
 
-    [Header("Mouse Fields")] public float mouseSensitivity;
+    [Header("Mouse Fields")] 
+    [SerializeField] private  float mouseSensitivity;
 
     private Transform _playerTransform;
 
@@ -38,7 +40,7 @@ public class PlayerController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         // Move the player's camera
         MouseMovement();
@@ -60,7 +62,7 @@ public class PlayerController : MonoBehaviour
         Vector3 move = transform.right * x + transform.forward * z;
 
         // Move the player
-        _controller.Move(move * speed * Time.deltaTime);
+        _controller.Move(move * (speed * Time.deltaTime));
     }
 
     /// <summary>

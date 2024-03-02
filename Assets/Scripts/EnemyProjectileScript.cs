@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyProjectileScript : MonoBehaviour
@@ -21,20 +19,11 @@ public class EnemyProjectileScript : MonoBehaviour
     // The direction the projectile is moving
     private Vector3 _direction;
     
-    // The enemy controller script that fired this projectile
-    private EnemyController _enemyControllerScript;
-    
     // The lifetime of the projectile
     private float _lifetime;
     
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         // Update the position of the projectile
         UpdatePosition();
@@ -76,23 +65,20 @@ public class EnemyProjectileScript : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public void Fire(EnemyController enemyControllerScript, Vector3 direction)
+    public void Fire(Vector3 direction)
     {
-        // set the enemy controller script
-        _enemyControllerScript = enemyControllerScript;
-        
         // set the direction
         _direction = direction.normalized;
     }
 
-    public void UpdatePosition()
+    private void UpdatePosition()
     {
         float difficultyMultiplier = ButtonStateManager.IsMasterButtonFilled 
             ? MasterSpeedMultiplier 
             : 1;
         
         // move the projectile
-        transform.position += _direction * (Speed * difficultyMultiplier) * Time.deltaTime;
+        transform.position += _direction * (Speed * difficultyMultiplier * Time.deltaTime);
         
         // Rotate the projectile to make it look like it's spinning
         transform.Rotate(Vector3.one, RotationsPerSecond * 360 * Time.deltaTime);

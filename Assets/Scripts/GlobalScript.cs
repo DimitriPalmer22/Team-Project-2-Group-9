@@ -44,6 +44,8 @@ public class GlobalScript : MonoBehaviour
     private GameObject _pauseMenu;
 
     #endregion Fields
+    
+    public bool IsGameOver => _isGameOver;
 
     #region Unity Methods
 
@@ -55,7 +57,7 @@ public class GlobalScript : MonoBehaviour
     }
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         // set the music reset volume to the music source's volume
         _musicResetVolume = _musicSource.volume;
@@ -87,7 +89,7 @@ public class GlobalScript : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         // Determine cursor visibility
         DetermineCursorVisibility();
@@ -103,10 +105,9 @@ public class GlobalScript : MonoBehaviour
     private void DetermineCursorVisibility()
     {
         Cursor.visible = _isGameOver || _isGamePaused;
-        if (Cursor.visible)
-            Cursor.lockState = CursorLockMode.None;
-        else
-            Cursor.lockState = CursorLockMode.Locked;
+        Cursor.lockState = (Cursor.visible) 
+            ? CursorLockMode.None 
+            : CursorLockMode.Locked;
     }
 
     private void UpdateInput()
@@ -132,8 +133,6 @@ public class GlobalScript : MonoBehaviour
 
         // Set the game over boolean to true
         _isGameOver = true;
-
-        // TODO: Disable player input
 
         // Freeze the game
         Time.timeScale = 0;

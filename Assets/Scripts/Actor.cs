@@ -19,6 +19,16 @@ public abstract class Actor : MonoBehaviour
 
     #endregion
 
+    #region Properties
+
+    // The current health of the actor
+    public int CurrentHealth => _currentHealth;
+
+    // The maximum health of the actor
+    public int MaxHealth => _maxHealth;
+    
+    #endregion
+
     #region Unity Methods
 
     // Start is called before the first frame update

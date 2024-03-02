@@ -57,7 +57,15 @@ public class SpellCastScript : MonoBehaviour
     
     #region Properties
     
+    public SpellCastType SpellType => _spellType;
+    
+    public int RemainingUses => _remainingUses;
+    
     public bool IsInvisible => _spellType == SpellCastType.Invisibility && _isSpellActive;
+    
+    public float RemainingDuration => _spellEffectRemaining;
+    
+    public bool IsSpellActive => _isSpellActive;
     
     #endregion Properties
     
@@ -79,7 +87,7 @@ public class SpellCastScript : MonoBehaviour
         
         // Pick up a freeze spell by default
         // ! TODO: Change to None when the game is ready to be played
-        PickUpSpell(SpellCastType.Freeze);
+        PickUpSpell(SpellCastType.Invisibility);
     }
 
     // Update is called once per frame

@@ -28,13 +28,13 @@ public class GlobalScript : MonoBehaviour
     // Audio source variable for music
     private AudioSource _musicSource;
 
-    [Header("UI")] 
-    
-    [SerializeField] private GameObject winScreen;
+    [Header("UI")] [SerializeField] private GameObject winScreen;
 
     [SerializeField] private GameObject loseScreen;
-    
+
     [SerializeField] private GameObject pauseScreenParent;
+    
+    [SerializeField] private GameObject inGameUIParent;
 
     /// <summary>
     /// The actual pause screen
@@ -42,7 +42,6 @@ public class GlobalScript : MonoBehaviour
     private GameObject _pauseMenu;
 
     #endregion Fields
-
 
     #region Unity Methods
 
@@ -68,17 +67,17 @@ public class GlobalScript : MonoBehaviour
 
         // Hide pause screen parent
         pauseScreenParent.SetActive(false);
-        
+
         // hide each of the pause screen parent's children
         for (int i = 0; i < pauseScreenParent.transform.childCount; i++)
         {
             // Get the child at index i
             var child = pauseScreenParent.transform.GetChild(i);
-            
+
             // Hide the child
             child.gameObject.SetActive(false);
         }
-        
+
         // show the pause screen while keeping the parent hidden
         _pauseMenu = pauseScreenParent.transform.Find("PauseMenu").gameObject;
         _pauseMenu.SetActive(true);
@@ -89,7 +88,7 @@ public class GlobalScript : MonoBehaviour
     {
         // Determine cursor visibility
         DetermineCursorVisibility();
-        
+
         // Update input
         UpdateInput();
     }
@@ -178,13 +177,13 @@ public class GlobalScript : MonoBehaviour
     {
         // Debug log "Returning to main menu"
         Debug.Log("Returning to main menu");
-        
+
         // Load the main menu scene
         SceneManager.LoadScene("MainMenu");
-        
+
         // Reset the time scale
         Time.timeScale = 1;
-        
+
         // Show the cursor
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
@@ -194,7 +193,7 @@ public class GlobalScript : MonoBehaviour
     {
         // Debug log "Exiting the app"
         Debug.Log("Exiting the app");
-        
+
         // Exit the app
         Application.Quit();
     }
@@ -205,35 +204,41 @@ public class GlobalScript : MonoBehaviour
 
         // Pause the game
         Time.timeScale = 0;
-        
+
         // Show pause screen parent
         pauseScreenParent.SetActive(true);
-        
+
         // hide each of the pause screen parent's children
         for (int i = 0; i < pauseScreenParent.transform.childCount; i++)
         {
             // Get the child at index i
             var child = pauseScreenParent.transform.GetChild(i);
-            
+
             // Hide the child
             child.gameObject.SetActive(false);
         }
-        
+
         // show the pause screen
         _pauseMenu.SetActive(true);
         
+        // Hide the in-game UI
+        inGameUIParent.SetActive(false);
+
         _isGamePaused = true;
     }
-    
+
     public void UnpauseGame()
     {
         Debug.Log("Unpausing the game");
-        
+
         // Unpause the game
         Time.timeScale = 1;
-        
+
         // Hide the pause screen
         pauseScreenParent.SetActive(false);
+        
+        // Show the in-game UI
+        inGameUIParent.SetActive(true);
 
         _isGamePaused = false;
     }

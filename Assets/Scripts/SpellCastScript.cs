@@ -44,10 +44,12 @@ public class SpellCastScript : MonoBehaviour
     [Header("Freeze Spell")]
     [SerializeField] private GameObject _freezePrefab;
     [SerializeField] private AudioSource _freezeSource;
+    [SerializeField] private AudioClip _freezeClip;
     [SerializeField] private ParticleSystem _freezeParticles;
     
     [Header("Invisibility Spell")]
     [SerializeField] private AudioSource _invisibilitySource;
+    [SerializeField] private AudioClip _invisibilityClip;
     [SerializeField] private ParticleSystem _invisibilityParticles;
     
     // The camera
@@ -165,7 +167,7 @@ public class SpellCastScript : MonoBehaviour
                 freezeProjectileScript.Fire(this, _camera.transform.forward);
                 
                 // Play the freeze sound
-                _freezeSource.Play();
+                _freezeSource.PlayOneShot(_freezeClip);
                 
                 // TODO: Play the freeze particles
                 _freezeParticles.Emit(ParticlesAmount);
@@ -177,7 +179,7 @@ public class SpellCastScript : MonoBehaviour
                 // Apply the invisibility effect
                 
                 // Play the invisibility sound
-                _invisibilitySource.Play();
+                _invisibilitySource.PlayOneShot(_invisibilityClip);
                 
                 // TODO: Play the invisibility particles
                 _invisibilityParticles.Emit(ParticlesAmount);

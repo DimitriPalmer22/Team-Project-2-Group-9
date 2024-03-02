@@ -647,6 +647,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1862460707343782923, guid: 6dbc92241002bc443b755446acba3ea6, type: 3}
+      propertyPath: _freezeClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 3ae1e3c8d0c9ef349a11f6cc20ac28e0, type: 3}
+    - target: {fileID: 1862460707343782923, guid: 6dbc92241002bc443b755446acba3ea6, type: 3}
+      propertyPath: _invisibilityClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 6f605bf254ebf054392a97f74d7efae8, type: 3}
     - target: {fileID: 1862460707343782931, guid: 6dbc92241002bc443b755446acba3ea6, type: 3}
       propertyPath: m_Name
       value: Player

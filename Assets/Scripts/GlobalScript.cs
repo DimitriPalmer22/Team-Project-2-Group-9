@@ -134,6 +134,9 @@ public class GlobalScript : MonoBehaviour
 
         // Freeze the game
         Time.timeScale = 0;
+        
+        // Hide the in-game UI
+        inGameUIParent.SetActive(false);
     }
 
     public void WinGame()

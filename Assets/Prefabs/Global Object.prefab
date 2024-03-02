@@ -50,8 +50,8 @@ MonoBehaviour:
   backgroundMusic: {fileID: 0}
   winMusic: {fileID: 0}
   loseMusic: {fileID: 0}
-  winScreen: {fileID: 0}
-  loseScreen: {fileID: 0}
+  winScreen: {fileID: 6282961778973487791}
+  loseScreen: {fileID: 6282961779670748728}
   pauseScreenParent: {fileID: 1812010737874416609}
   inGameUIParent: {fileID: 7796326804545400777}
 --- !u!1001 &215080095964834955
@@ -454,8 +454,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4b7005047de80e74cba4a8fa4f3ab03e, type: 3}
+--- !u!1 &6282961778973487791 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3598782685640783350, guid: 4b7005047de80e74cba4a8fa4f3ab03e, type: 3}
+  m_PrefabInstance: {fileID: 7404165976853563225}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6282961779641421893 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3598782686027699996, guid: 4b7005047de80e74cba4a8fa4f3ab03e, type: 3}
+  m_PrefabInstance: {fileID: 7404165976853563225}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6282961779670748728 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3598782686065477985, guid: 4b7005047de80e74cba4a8fa4f3ab03e, type: 3}
   m_PrefabInstance: {fileID: 7404165976853563225}
   m_PrefabAsset: {fileID: 0}

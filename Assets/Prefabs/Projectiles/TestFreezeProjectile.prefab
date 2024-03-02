@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2452887600917335794}
   - component: {fileID: 2956056923810295608}
   - component: {fileID: 5634839687069887293}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -108,7 +108,7 @@ GameObject:
   - component: {fileID: 3543351879852796169}
   - component: {fileID: 3133271266943292524}
   - component: {fileID: 500022013847081065}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -191,7 +191,7 @@ GameObject:
   - component: {fileID: 874792785696389331}
   - component: {fileID: 7587096880269157637}
   - component: {fileID: 8027764251153237256}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TestFreezeProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}

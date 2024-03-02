@@ -108,7 +108,7 @@ public class EnemyController : MonoBehaviour
     /// Is the enemy frozen
     /// </summary>
     public bool IsFrozen => _isFrozen;
-    
+
     public float SpottingProgress => _timeInvestigating / InvestigationTime;
 
     #endregion
@@ -155,7 +155,6 @@ public class EnemyController : MonoBehaviour
             case EnemyPatrolState.Idle:
                 material.color = Color.white;
                 break;
-
         }
     }
 
@@ -192,9 +191,17 @@ public class EnemyController : MonoBehaviour
             ? MasterDetectionRangeMultiplier
             : 1;
 
-        // Cast a ray from the enemy to the player
-        var rayHit = Physics.Raycast(transform.position, player.transform.position - transform.position,
-            out RaycastHit hit, visionRange * difficultyMultiplier);
+        // Ignore the projectile layer
+        int layerMask = ~LayerMask.GetMask("Projectile");
+
+        // Cast a ray from the enemy to the player that ignores the projectile layer
+        var rayHit = Physics.Raycast(
+            origin: transform.position,
+            direction: player.transform.position - transform.position,
+            hitInfo: out RaycastHit hit,
+            maxDistance: visionRange * difficultyMultiplier,
+            layerMask: layerMask
+        );
 
         // If the ray hits something, check if it's the player
         if (!rayHit)
@@ -219,9 +226,9 @@ public class EnemyController : MonoBehaviour
             LookForNearestPlayer();
 
         // If the target player null, return
-        if (_targetPlayer == null) 
+        if (_targetPlayer == null)
             return;
-        
+
         // check if the player is still visible and save it to a variable
         bool isPlayerVisible = IsPlayerVisible(_targetPlayer);
 
@@ -291,9 +298,9 @@ public class EnemyController : MonoBehaviour
         }
 
         // If the enemy has not spotted the player recently, return
-        if (_timeInvestigating <= 0) 
+        if (_timeInvestigating <= 0)
             return;
-        
+
         // If the enemy has been investigating for more than the investigation time,
         // set the patrol state to chase
         if (_timeInvestigating >= InvestigationTime)

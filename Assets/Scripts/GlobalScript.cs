@@ -16,8 +16,7 @@ public class GlobalScript : MonoBehaviour
     [Header("Audio")]
 
     // Audio clip variable for background music
-    [SerializeField]
-    private AudioClip backgroundMusic;
+    [SerializeField] private AudioClip backgroundMusic;
 
     // Audio clip variable for win music
     [SerializeField] private AudioClip winMusic;
@@ -26,7 +25,7 @@ public class GlobalScript : MonoBehaviour
     [SerializeField] private AudioClip loseMusic;
 
     // Audio source variable for music
-    private AudioSource _musicSource;
+    [SerializeField] private AudioSource _musicSource;
 
     [Header("UI")] [SerializeField] private GameObject winScreen;
 
@@ -58,9 +57,6 @@ public class GlobalScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // Get audio source component for music
-        _musicSource = GetComponent<AudioSource>();
-
         // Hide win and lose screens
         winScreen.SetActive(false);
         loseScreen.SetActive(false);

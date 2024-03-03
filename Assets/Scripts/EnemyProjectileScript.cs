@@ -15,6 +15,9 @@ public class EnemyProjectileScript : MonoBehaviour
     // The speed of the projectile
     [SerializeField] private float Speed;
 
+    // A bool to know if this projectile is active
+    private bool _enabled = true;
+
     
     // The direction the projectile is moving
     private Vector3 _direction;
@@ -32,7 +35,7 @@ public class EnemyProjectileScript : MonoBehaviour
         _lifetime += Time.deltaTime;
         
         // If the lifetime is greater than the max lifetime, destroy the projectile
-        if (_lifetime > MaxLifetime)
+        if (_lifetime > MaxLifetime || !_enabled)
             Destroy(gameObject);
     }
 
@@ -52,10 +55,14 @@ public class EnemyProjectileScript : MonoBehaviour
                 ActorPlayer playerController = other.GetComponent<ActorPlayer>();
                 
                 // Decrement the player's health
-                playerController.ChangeHealth(-1);
+                if (_enabled)
+                    playerController.ChangeHealth(-1);
 
                 // Log the player's health
                 Debug.Log($"Player is hit! Player's health: {playerController.CurrentHealth}");
+
+                // Disable the projectile
+                _enabled = false;
                 break;
             
             // If the other object is a projectile, do nothing

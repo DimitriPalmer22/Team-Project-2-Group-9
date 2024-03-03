@@ -9,6 +9,7 @@ TagManager:
   - Win Object
   - Map
   - Projectile
+  - Start Area
   layers:
   - Default
   - TransparentFX

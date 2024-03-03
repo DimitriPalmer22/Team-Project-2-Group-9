@@ -71,11 +71,13 @@ public class SpellCastScript : MonoBehaviour
     
     public int RemainingUses => _remainingUses;
     
-    public bool IsInvisible => _spellType == SpellCastType.Invisibility && _isSpellActive;
+    public bool IsInvisible => (_spellType == SpellCastType.Invisibility && _isSpellActive) || IsInStartArea;
     
     public float RemainingDuration => _spellEffectRemaining;
     
     public bool IsSpellActive => _isSpellActive;
+    
+    public bool IsInStartArea { get; set; }
     
     #endregion Properties
     

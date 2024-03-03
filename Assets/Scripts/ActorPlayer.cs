@@ -14,6 +14,13 @@ public class ActorPlayer : Actor
         // If the novice button is filled, the player cannot lose health
         if (ButtonStateManager.IsNoviceButtonFilled)
             return;
+     
+        // get the spell cast script
+        SpellCastScript spellCastScript = GetComponent<SpellCastScript>();
+        
+        // If the player is immune, do nothing
+        if (spellCastScript.IsInStartArea)
+            return;
         
         base.ChangeHealth(amount);
 

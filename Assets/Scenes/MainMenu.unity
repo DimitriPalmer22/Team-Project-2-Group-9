@@ -2476,7 +2476,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Enchanted!
+  m_text: Wizthief
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b648b09ba40689c4e9c42f56e95959d8, type: 2}
   m_sharedMaterial: {fileID: 909597649742116260, guid: b648b09ba40689c4e9c42f56e95959d8, type: 2}

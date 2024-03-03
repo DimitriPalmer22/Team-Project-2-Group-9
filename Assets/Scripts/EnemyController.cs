@@ -71,6 +71,8 @@ public class EnemyController : MonoBehaviour
     /// </summary>
     [Header("Shooting")] [SerializeField] private GameObject _projectilePrefab;
 
+    [SerializeField] private Transform _firingPoint;
+    
     /// <summary>
     /// // The rate at which the enemy can shoot (Bullets per minute)
     /// </summary>
@@ -82,6 +84,9 @@ public class EnemyController : MonoBehaviour
 
     [SerializeField] private AudioClip _frozenAudioClip;
 
+    [Header("Animation")] [SerializeField] private Animator _animator;
+
+    
     #endregion Fields
 
     #region Properties
@@ -119,6 +124,9 @@ public class EnemyController : MonoBehaviour
         // If the enemy is frozen, return
         if (_isFrozen)
             return;
+        
+        // Determine the animator speed
+        DetermineAnimatorSpeed();
 
         // Determine the target player
         DetermineTarget();
@@ -310,6 +318,8 @@ public class EnemyController : MonoBehaviour
                 StartCoroutine(ResetCanShoot());
 
             _patrolState = EnemyPatrolState.Chase;
+            
+            LookTowardTarget();
         }
 
         // The enemy has been investigating for less than the investigation time
@@ -413,14 +423,18 @@ public class EnemyController : MonoBehaviour
         // Look at the player
         LookTowardTarget();
 
+        // Make sure the firing point is not null
+        if (_firingPoint == null)
+            _firingPoint = transform;
+
         // Instantiate the projectile prefab
-        GameObject projectile = Instantiate(_projectilePrefab, transform.position, Quaternion.identity);
+        GameObject projectile = Instantiate(_projectilePrefab, _firingPoint.position, Quaternion.identity);
 
         // Get the enemy projectile script
         EnemyProjectileScript enemyProjectileScript = projectile.GetComponent<EnemyProjectileScript>();
 
         // Fire the projectile        
-        enemyProjectileScript.Fire(transform.forward);
+        enemyProjectileScript.Fire(_firingPoint.forward);
 
         // Play the fire audio
         _audioSource.PlayOneShot(_fireAudioClip);
@@ -448,4 +462,16 @@ public class EnemyController : MonoBehaviour
         // Set can shoot to true
         _canShoot = true;
     }
+
+    private void DetermineAnimatorSpeed()
+    {
+        if (_animator == null)
+            return;
+        
+        // Set the animator speed based on the patrol state
+        _animator.speed = (_patrolState == EnemyPatrolState.Chase) 
+            ? 5 
+            : 1;
+    }
+    
 }

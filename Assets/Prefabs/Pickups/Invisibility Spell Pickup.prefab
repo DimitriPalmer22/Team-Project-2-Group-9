@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7419327273087882107}
   - component: {fileID: 3922380077858621347}
   - component: {fileID: 6706854816812444727}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Invisibility Spell Pickup
   m_TagString: Spell Pickup
   m_Icon: {fileID: 0}

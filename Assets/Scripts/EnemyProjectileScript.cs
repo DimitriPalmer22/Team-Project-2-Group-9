@@ -57,6 +57,10 @@ public class EnemyProjectileScript : MonoBehaviour
                 // Log the player's health
                 Debug.Log($"Player is hit! Player's health: {playerController.CurrentHealth}");
                 break;
+            
+            // If the other object is a projectile, do nothing
+            case "Projectile":
+                return;
         }
 
         Debug.Log($"Enemy Projectile Hit: {other.gameObject.tag}");

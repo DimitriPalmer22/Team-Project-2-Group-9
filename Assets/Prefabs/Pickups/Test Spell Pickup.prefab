@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8284931108685045248}
   - component: {fileID: 8284931108685045251}
   - component: {fileID: 7180390740797489573}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Test Spell Pickup
   m_TagString: Spell Pickup
   m_Icon: {fileID: 0}
@@ -110,3 +110,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ed965274b93f5847bb1ca8b2dd4a1cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spellType: 0

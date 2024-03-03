@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5644832472396701065}
   - component: {fileID: 5357538077600258447}
   - component: {fileID: 4939902747065689346}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Win Object (REAL)
   m_TagString: Win Object
   m_Icon: {fileID: 0}

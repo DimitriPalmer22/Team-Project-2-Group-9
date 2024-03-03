@@ -200,7 +200,7 @@ public class EnemyController : MonoBehaviour
             : 1;
 
         // Ignore the projectile layer
-        int layerMask = ~LayerMask.GetMask("Projectile");
+        int layerMask = ~LayerMask.GetMask("Projectile", "Pickup");
 
         // Cast a ray from the enemy to the player that ignores the projectile layer
         var rayHit = Physics.Raycast(

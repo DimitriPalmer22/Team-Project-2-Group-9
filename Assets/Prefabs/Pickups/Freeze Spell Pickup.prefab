@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5954105915558285685}
   - component: {fileID: 2176855520784986416}
   - component: {fileID: 1738645842383090275}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Freeze Spell Pickup
   m_TagString: Spell Pickup
   m_Icon: {fileID: 0}

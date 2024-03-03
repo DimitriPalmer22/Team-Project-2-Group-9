@@ -53,6 +53,11 @@ public class FreezeProjectileScript : MonoBehaviour
 
                 Debug.Log($"ENEMY IS FROZEN");
                 break;
+            
+                        
+            // If the other object is a projectile, do nothing
+            case "Projectile":
+                return;
         }
         
         Debug.Log($"FREEZE SPELL HIT: {other.gameObject.tag}");

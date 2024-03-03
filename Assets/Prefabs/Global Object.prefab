@@ -152,6 +152,7 @@ MonoBehaviour:
   loseScreen: {fileID: 6282961779670748728}
   pauseScreenParent: {fileID: 1812010737874416609}
   inGameUIParent: {fileID: 7796326804545400777}
+  timerText: {fileID: 5721599537914473814}
 --- !u!1001 &215080095964834955
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -242,6 +243,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c231957a7e1f47d4d87f6f44aeb0ca3c, type: 3}
+--- !u!114 &5721599537914473814 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5592109825440072157, guid: c231957a7e1f47d4d87f6f44aeb0ca3c, type: 3}
+  m_PrefabInstance: {fileID: 215080095964834955}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &7304052041894153092 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7467296485658126095, guid: c231957a7e1f47d4d87f6f44aeb0ca3c, type: 3}

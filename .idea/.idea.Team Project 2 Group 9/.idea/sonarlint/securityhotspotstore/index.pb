@@ -25,8 +25,6 @@ W
 'Assets/Scripts/ButtonStateController.cs,d\f\df88d2f404ac309e58ba061d096b8c41a64c0aca
 K
 Assets/Scripts/UIManager.cs,e\5\e5ec39ca5a5aed050364ca0c1005a8592a4224fb
-L
-Assets/Scripts/ActorEnemy.cs,0\b\0b3d6f30b4328993ccc8eb82a619f91888f67216
 R
 "Assets/Scripts/PlayButtonScript.cs,b\0\b02784367fdcbb6fdf074a1e60911716df902968
 X

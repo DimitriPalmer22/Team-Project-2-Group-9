@@ -1,8 +1,14 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GlobalScript : MonoBehaviour
 {
+    
+    private const float TimerLimit = 90;
+    
+    private const bool UseTimer = false;
+    
     public static GlobalScript Instance { get; private set; }
 
     #region Fields
@@ -12,6 +18,9 @@ public class GlobalScript : MonoBehaviour
 
     // Boolean to determine if the game is paused
     private bool _isGamePaused;
+
+    // The remaining time in the game
+    private float _timerRemaining;
 
     [Header("Audio")]
 
@@ -37,6 +46,8 @@ public class GlobalScript : MonoBehaviour
     [SerializeField] private GameObject pauseScreenParent;
     
     [SerializeField] private GameObject inGameUIParent;
+    
+    [SerializeField] private TMP_Text timerText;
 
     /// <summary>
     /// The actual pause screen
@@ -86,11 +97,17 @@ public class GlobalScript : MonoBehaviour
         // show the pause screen while keeping the parent hidden
         _pauseMenu = pauseScreenParent.transform.Find("PauseMenu").gameObject;
         _pauseMenu.SetActive(true);
+        
+        // Set the timer remaining to the timer limit
+        _timerRemaining = TimerLimit;
     }
 
     // Update is called once per frame
     private void Update()
     {
+        // If the game is over, return
+        TickTimer();
+        
         // Determine cursor visibility
         DetermineCursorVisibility();
 
@@ -247,6 +264,34 @@ public class GlobalScript : MonoBehaviour
         inGameUIParent.SetActive(true);
 
         _isGamePaused = false;
+    }
+
+    private void TickTimer()
+    {
+        // If the game is over, return
+        if (_isGameOver)
+            return;
+        
+        // hide the timer text if the timer is not being used
+        timerText.gameObject.SetActive(UseTimer);
+        
+        // If the timer is not being used, return
+        if (!UseTimer)
+            return;
+        
+        // Decrement the timer remaining
+        _timerRemaining -= Time.deltaTime;
+        
+        // Set the timer text to the timer remaining
+        timerText.text = $"Time Remaining: {_timerRemaining:0.00}";
+        
+        // If the timer remaining is less than or equal to 0, lose the game
+        if (_timerRemaining <= 0)
+        {
+            _timerRemaining = 0;
+            
+            LoseGame();
+        }
     }
 
     #endregion

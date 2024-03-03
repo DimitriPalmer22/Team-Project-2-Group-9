@@ -373,12 +373,15 @@ public class EnemyController : MonoBehaviour
         // The duration of each blink
         const float blinkDuration = .1f;
 
-        // Get the enemy's material
-        Material rendererMaterial = GetComponent<Renderer>().material;
+        // get the enemy's renderer
+        Renderer rendererComponent = GetComponent<Renderer>();
 
         // While the enemy is frozen
-        while (_isFrozen)
+        while (_isFrozen && rendererComponent != null)
         {
+            // Get the enemy's material
+            Material rendererMaterial = rendererComponent.material;
+
             // Set the enemy's material to be cyan
             rendererMaterial.color = Color.cyan;
 

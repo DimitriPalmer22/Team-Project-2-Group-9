@@ -1,10 +1,2 @@
 
-…csharpsquid:S3928°"[Use a constructor overloads that allows a more meaningful exception message to be provided.(«èñıÿÿÿÿ8ĞÂÌ…à1
-wcsharpsquid:S3776é"RRefactor this method to reduce its Cognitive Complexity from 21 to the 15 allowed.(Ç¿¯Œ8¿Ã¾íß1
-Kcsharpsquid:S3903".Move 'EnemyController' into a named namespace.(½×Œº
-@csharpsquid:S3626Ğ"Remove this redundant jump.(ûÁİ…8»õØçß1
-Acsharpsquid:S125'"Remove this commented out code.(ßõà8»õØçß1
-Hcsharpsquid:S125Œ"Remove this commented out code.(¹àÎÀüÿÿÿÿ8»õØçß1
-Hcsharpsquid:S125ü"Remove this commented out code.(ë¤æ¤şÿÿÿÿ8»õØçß1
-Hcsharpsquid:S125­"Remove this commented out code.(ë¤æ¤şÿÿÿÿ8¼õØçß1
-Ycsharpsquid:S1135"4Complete the task associated to this 'TODO' comment.(À»ÛÕ8ÒÂÌ…à1
+Kcsharpsquid:S3903".Move 'EnemyController' into a named namespace.(½×Œº

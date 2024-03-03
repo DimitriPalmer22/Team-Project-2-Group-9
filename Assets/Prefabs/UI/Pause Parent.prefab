@@ -2264,12 +2264,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Reach the end of the library
-
-    and obtain the magical staff
-
-    without
-    getting caught!'
+  m_text: "Reach the end of the library\nand obtain the magical staff\nwithout losing
+    all your health! \nUse spells to help you along the way!"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b8bd1d34bc13b7b4fb70582c1252e97f, type: 2}
   m_sharedMaterial: {fileID: 3165087109914004049, guid: b8bd1d34bc13b7b4fb70582c1252e97f, type: 2}
@@ -2296,8 +2292,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 50
-  m_fontSizeBase: 50
+  m_fontSize: 40
+  m_fontSizeBase: 40
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 0

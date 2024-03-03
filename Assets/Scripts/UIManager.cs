@@ -1,14 +1,13 @@
 using System;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    public CanvasGroup mainMenuCanvasGroup;
-    public CanvasGroup aboutMenuCanvasGroup;
-    public CanvasGroup optionsMenuCanvasGroup;
-    public float fadeDuration;
+    [SerializeField] private CanvasGroup mainMenuCanvasGroup;
+    [SerializeField] private CanvasGroup aboutMenuCanvasGroup;
+    [SerializeField] private CanvasGroup optionsMenuCanvasGroup;
+    [SerializeField] private float fadeDuration;
 
 
     public void Fade(CanvasGroup canvasGroup, bool fadeIn, Action onComplete = null)
@@ -32,7 +31,6 @@ public class UIManager : MonoBehaviour
         while (elapsedTime < fadeDuration)
         {
             float newAlpha = Mathf.Lerp(startAlpha, endAlpha, elapsedTime / fadeDuration);
-            // Debug.Log($"Fading '{canvasGroup.gameObject.name}' to alpha: {newAlpha} at time: {Time.time}");
 
             canvasGroup.alpha = newAlpha;
             elapsedTime += Time.deltaTime;
@@ -40,7 +38,6 @@ public class UIManager : MonoBehaviour
         }
 
         canvasGroup.alpha = endAlpha;
-        // Debug.Log($"Fade completed on {canvasGroup.gameObject.name}. Final Alpha: {endAlpha}. Time: {Time.time}");
 
         if (isFadingIn)
         {
@@ -50,7 +47,6 @@ public class UIManager : MonoBehaviour
         else
         {
             canvasGroup.gameObject.SetActive(false);
-            // Debug.Log($"'{canvasGroup.gameObject.name}' set to inactive after fade out. Time: {Time.time}");
         }
 
         onComplete?.Invoke();

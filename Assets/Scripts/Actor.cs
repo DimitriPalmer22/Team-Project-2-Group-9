@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class Actor : MonoBehaviour
@@ -32,7 +30,7 @@ public abstract class Actor : MonoBehaviour
     #region Unity Methods
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         // Ensure the max health is at least 1
         if (_maxHealth <= 0)
@@ -40,12 +38,6 @@ public abstract class Actor : MonoBehaviour
         
         // Set the current health to the max health
         _currentHealth = _maxHealth;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     #endregion
@@ -58,14 +50,11 @@ public abstract class Actor : MonoBehaviour
 
         // Lose health
         if (amount < 0)
-        {
             Debug.Log($"Lost {amount} health. Current health: {_currentHealth}");
-        }
+        
         // Gain health
         else
-        {
             Debug.Log($"Gained {amount} health. Current health: {_currentHealth}");            
-        }
         
         if (_currentHealth <= 0)
             Die();

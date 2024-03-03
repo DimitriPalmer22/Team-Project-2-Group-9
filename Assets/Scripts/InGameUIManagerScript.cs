@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -21,7 +19,7 @@ public class InGameUIManagerScript : MonoBehaviour
     private ActorPlayer _actorPlayer;
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         // Get the camera
         _camera = Camera.main;
@@ -34,7 +32,7 @@ public class InGameUIManagerScript : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         // Update the health text
         UpdateHealthText();

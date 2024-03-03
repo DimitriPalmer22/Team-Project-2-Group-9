@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 
@@ -18,6 +17,15 @@ public class SpellCastScript : MonoBehaviour
 
     // The number of particles to emit
     private const int ParticlesAmount = 200;
+    
+    // The duration of the invisibility spell
+    private const float InvisibilityDuration = 8;
+    
+    // The number of uses given when the player picks up an invisibility spell
+    private const int InvisibilityUses = 1;
+    
+    // The number of uses given when the player picks up a freeze spell
+    private const int FreezeUses = 2;
     
     #region Fields
     
@@ -82,18 +90,14 @@ public class SpellCastScript : MonoBehaviour
     #endregion Keys
     
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         // Set the camera to the main camera
         _camera = Camera.main;
-        
-        // Pick up a freeze spell by default
-        // ! TODO: Change to None when the game is ready to be played
-        PickUpSpell(SpellCastType.Invisibility);
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         // Read the player's input
         UpdateInput();
@@ -107,6 +111,17 @@ public class SpellCastScript : MonoBehaviour
             if (_spellEffectRemaining <= 0)
                 DeactivateSpell();
         }
+
+        // If the player has no uses left, set the spell type to none
+        if (_spellType != SpellCastType.None && _remainingUses <= 0)
+        {
+            // if the current spell is not a duration spell
+            if (!_spellType.IsDurationSpellType())
+                _spellType = SpellCastType.None;
+            
+            else if (_spellEffectRemaining <= 0)
+                _spellType = SpellCastType.None;
+        }
     }
 
     #region Methods
@@ -114,8 +129,12 @@ public class SpellCastScript : MonoBehaviour
     /// <summary>
     /// Read the player's input
     /// </summary>
-    void UpdateInput()
+    private void UpdateInput()
     {
+        // Disable input if the game is over
+        if (GlobalScript.Instance.IsGameOver)
+            return;
+        
         // If the player presses the spell cast button, cast the spell
         if (Input.GetKeyDown(CastSpellKey))
             CastSpell();
@@ -130,12 +149,6 @@ public class SpellCastScript : MonoBehaviour
             if (spellPickupScript != null)
                 spellPickupScript.PickUpSpell(this);
         }
-        
-        // If the player presses L, pick up a freeze spell
-        // TODO: DELETE THIS LINE LATER
-        // ! @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-        if (Input.GetKeyDown(KeyCode.L))
-            PickUpSpell(SpellCastType.Freeze);
         
     }
     
@@ -171,7 +184,7 @@ public class SpellCastScript : MonoBehaviour
                 // Play the freeze sound
                 _freezeSource.PlayOneShot(_freezeClip);
                 
-                // TODO: Play the freeze particles
+                // Play the freeze particles
                 _freezeParticles.Emit(ParticlesAmount);
                 
                 break;
@@ -183,13 +196,11 @@ public class SpellCastScript : MonoBehaviour
                 // Play the invisibility sound
                 _invisibilitySource.PlayOneShot(_invisibilityClip);
                 
-                // TODO: Play the invisibility particles
+                // Play the invisibility particles
                 _invisibilityParticles.Emit(ParticlesAmount);
                 
                 break;
             
-            default:
-                throw new ArgumentOutOfRangeException();
         }
         
         // Decrement the remaining uses of this spell
@@ -217,21 +228,6 @@ public class SpellCastScript : MonoBehaviour
         // set the spell to inactive
         _isSpellActive = false;
         
-        // Different effects depending on the current spell type
-        switch (_spellType)
-        {
-            // Invisibility spell
-            case SpellCastType.Invisibility:
-                // TODO: Remove the invisibility effect
-                break;
-            
-            // Teleport spell
-            case SpellCastType.Teleport:
-                break;
-            
-            default:
-                break;
-        }
     }
 
 
@@ -288,21 +284,18 @@ public class SpellCastScript : MonoBehaviour
             
             // Picked up a freeze spell
             case SpellCastType.Freeze:
-                _remainingUses = 2;
+                _remainingUses = FreezeUses;
                 break;
             
             // Picked up an invisibility spell
             case SpellCastType.Invisibility:
-                _remainingUses = 1;
-                _spellEffectRemaining = 10;
+                _remainingUses = InvisibilityUses;
+                _spellEffectRemaining = InvisibilityDuration;
                 break;
             
             // Picked up a teleport spell
             case SpellCastType.Teleport:
                 _remainingUses = 1;
-                break;
-            
-            default:
                 break;
         }
         

@@ -1,20 +1,19 @@
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.Video;
 using System;
 using System.Collections;
 
 public class AnimationsManager : MonoBehaviour
 {
-    public UIManager uiManager; 
-    public VideoPlayer videoPlayer; 
-    public CanvasGroup mainMenuGroup;
-    public CanvasGroup aboutMenuGroup;
-    public CanvasGroup optionsMenuGroup;
-    public VideoClip singlePageAnimation;
-    public VideoClip twoPageAnimation;
-    public VideoClip page1Reversed;
-    public VideoClip page2Reversed;
+    [SerializeField] private UIManager uiManager; 
+    [SerializeField] private VideoPlayer videoPlayer; 
+    [SerializeField] private CanvasGroup mainMenuGroup;
+    [SerializeField] private CanvasGroup aboutMenuGroup;
+    [SerializeField] private CanvasGroup optionsMenuGroup;
+    [SerializeField] private VideoClip singlePageAnimation;
+    [SerializeField] private VideoClip twoPageAnimation;
+    [SerializeField] private VideoClip page1Reversed;
+    [SerializeField] private VideoClip page2Reversed;
 
 
     public void PlayVideo(VideoClip clipToPlay, Action onVideoFinished)
@@ -71,7 +70,9 @@ private void StartTransition(VideoClip videoClip, CanvasGroup initialFadeOutGrou
         {
             fadeInGroup.gameObject.SetActive(true); 
             fadeInGroup.alpha = 0; 
-            Debug.Log($"Before fading in, fadeOutGroup is {fadeOutGroup.gameObject.name} and fadeInGroup is {fadeInGroup.gameObject.name}");
+            
+            // Debug.Log($"Before fading in, fadeOutGroup is {fadeOutGroup.gameObject.name} and fadeInGroup is {fadeInGroup.gameObject.name}");
+            
             uiManager.Fade(fadeInGroup, true, () =>
             {
                 fadeInGroup = null;

@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -12,11 +9,6 @@ public class EnemyNavMesh : MonoBehaviour
     private const float StopAndFireDistance = 3f;
     
     #region Fields
-
-    /// <summary>
-    /// The target player / whatever the enemy is navigating to
-    /// </summary>
-    private Transform _navigationTarget;
 
     /// <summary>
     /// The enemy controller component
@@ -36,7 +28,6 @@ public class EnemyNavMesh : MonoBehaviour
     /// <summary>
     /// The index of the current patrol checkpoint the enemy is moving to.
     /// DO NOT CHANGE THIS IN THE INSPECTOR
-    /// TODO: Make this private
     /// </summary>
     private int _currentPatrolIndex;
     
@@ -63,14 +54,14 @@ public class EnemyNavMesh : MonoBehaviour
     }
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         // get the enemy controller component
         _enemyController = GetComponent<EnemyController>();
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         switch (PatrolState)
         {
@@ -97,9 +88,6 @@ public class EnemyNavMesh : MonoBehaviour
             case EnemyPatrolState.Idle:
                 _navMeshAgent.enabled = false;
                 break;
-            
-            default:
-                throw new ArgumentOutOfRangeException();
         }
         
     }
@@ -118,22 +106,17 @@ public class EnemyNavMesh : MonoBehaviour
         _navMeshAgent.enabled = WillNavigateIfAble;
         if (!_navMeshAgent.enabled)
             return;
-        
-        // set the navigation target to the player's transform
-        _navigationTarget = _enemyController.TargetPlayer.transform;
+
+        // get the player's position
+        var playerPosition = _enemyController.TargetPlayer.transform.position;
         
         // Set the nav mesh agent's destination to the player's position
-        _navMeshAgent.destination = _enemyController.TargetPlayer.transform.position;
+        _navMeshAgent.destination = playerPosition;
         
         // Disable the nav mesh agent if the player is within the stop and fire distance
-        var distance = Vector3.Distance(transform.position, _enemyController.TargetPlayer.transform.position);
+        var distance = Vector3.Distance(transform.position, playerPosition);
         if (distance < StopAndFireDistance)
-        {
             _navMeshAgent.enabled = false;
-            
-            // // look at the player
-            // transform.LookAt(_enemyController.TargetPlayer.transform);
-        }        
     }
 
     private void NavigateIfPatrolling()
@@ -193,9 +176,6 @@ public class EnemyNavMesh : MonoBehaviour
         if (!_navMeshAgent.enabled)
             return;
         
-        // set the navigation target to the player's transform
-        _navigationTarget = _enemyController.TargetPlayer.transform;
-        
         // if the enemy is investigating, navigate to the last known player position
         _navMeshAgent.destination = _enemyController.LastKnownPlayerPosition;
         
@@ -203,10 +183,6 @@ public class EnemyNavMesh : MonoBehaviour
         var distance = Vector3.Distance(transform.position, _navMeshAgent.destination);
         if (distance < StopAndFireDistance)
             _navMeshAgent.enabled = false;
-
-        // // look at the player
-        // transform.LookAt(_enemyController.TargetPlayer.transform);
-
     }
     
     public void SetNearestPatrolTarget()
@@ -233,16 +209,4 @@ public class EnemyNavMesh : MonoBehaviour
 
     #endregion
     
-}
-
-/// <summary>
-/// The state of the enemy's patrol
-/// </summary>
-public enum EnemyPatrolState
-{
-    Patrol,
-    Investigate,
-    Chase,
-    Lost,
-    Idle,
 }

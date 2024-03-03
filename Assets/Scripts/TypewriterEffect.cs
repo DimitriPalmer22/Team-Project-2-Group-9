@@ -4,23 +4,30 @@ using UnityEngine;
 
 public class TypewriterEffect : MonoBehaviour
 {
-    public float typingSpeed = 0.05f; // Speed of typing, in seconds per character
-    public string fullText; // The full text to display
-    private string currentText = ""; // Current text displayed
-    public TMP_Text textComponent; // Reference to the TextMeshPro component
+    // Speed of typing, in seconds per character
+    [SerializeField] private float typingSpeed = 0.05f;
+    
+    // The full text to display
+    [SerializeField] private string fullText;
+    
+    // Current text displayed
+    private string _currentText = ""; 
+    
+    // Reference to the TextMeshPro component
+    [SerializeField] private TMP_Text textComponent; 
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         StartCoroutine(ShowText());
     }
 
-    IEnumerator ShowText()
+    private IEnumerator ShowText()
     {
         for (int i = 0; i <= fullText.Length; i++)
         {
-            currentText = fullText.Substring(0, i);
-            textComponent.text = currentText;
+            _currentText = fullText.Substring(0, i);
+            textComponent.text = _currentText;
             yield return new WaitForSecondsRealtime(typingSpeed);
         }
     }

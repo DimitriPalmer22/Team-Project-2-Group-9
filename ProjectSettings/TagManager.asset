@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - Win Object
   - Map
+  - Projectile
   layers:
   - Default
   - TransparentFX

@@ -5100,7 +5100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbced758738167542b5eb89c6f1dadbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _freezePrefab: {fileID: 7871647701971169757, guid: f8095d76e750270428f6ee5186dd2a85, type: 3}
+  _freezePrefab: {fileID: 898999729791947815, guid: a70283ddccc533b44bb626a50374e22c, type: 3}
   _freezeSource: {fileID: 6665510097192490672}
   _freezeClip: {fileID: 8300000, guid: c98e3c335aad9d24d9ed18c70b646bf9, type: 3}
   _freezeParticles: {fileID: 8365854022687534885}

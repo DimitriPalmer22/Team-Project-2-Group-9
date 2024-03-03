@@ -68,6 +68,10 @@ private void StartTransition(VideoClip videoClip, CanvasGroup initialFadeOutGrou
 
         PlayVideo(videoClip, () =>
         {
+            Debug.Log($"NULLS: -{fadeInGroup}- -{uiManager}-");
+            if (fadeInGroup == null)
+                return;
+                
             fadeInGroup.gameObject.SetActive(true); 
             fadeInGroup.alpha = 0; 
             

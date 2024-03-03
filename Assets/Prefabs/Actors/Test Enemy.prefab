@@ -389,7 +389,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   visionRange: 10
-  _projectilePrefab: {fileID: 3539642101868134856, guid: b115bdfde87963346918382d4a821a6b, type: 3}
+  _projectilePrefab: {fileID: 5043598522536709173, guid: 87683dd3e1f61eb4198f35b1774b5706, type: 3}
   _fireRate: 30
   _audioSource: {fileID: 8522948359024462387}
   _fireAudioClip: {fileID: 8300000, guid: b800d8328ceaab84eb8208a6387bec6b, type: 3}
@@ -696,8 +696,8 @@ GameObject:
   - component: {fileID: 7765838089782662312}
   - component: {fileID: 3360889456991257570}
   - component: {fileID: 4662772475671193270}
-  - component: {fileID: 5930046651268232261}
   - component: {fileID: 8871018433502283684}
+  - component: {fileID: 5930046651268232261}
   m_Layer: 6
   m_Name: Detection Bar
   m_TagString: Untagged
@@ -790,23 +790,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &5930046651268232261
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9165765274742034166}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2047d69313c81624fa2c5009d4f37969, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _barForeground: {fileID: 9181353406729021828}
-  _barBackround: {fileID: 3554574175094944327}
-  _barText: {fileID: 4313899216770765177}
-  _slider: {fileID: 8871018433502283684}
-  _enemyController: {fileID: 6741801067485882234}
 --- !u!114 &8871018433502283684
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -858,3 +841,20 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &5930046651268232261
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9165765274742034166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2047d69313c81624fa2c5009d4f37969, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _barForeground: {fileID: 9181353406729021828}
+  _barBackround: {fileID: 3554574175094944327}
+  _barText: {fileID: 4313899216770765177}
+  _slider: {fileID: 8871018433502283684}
+  _enemyController: {fileID: 6741801067485882234}

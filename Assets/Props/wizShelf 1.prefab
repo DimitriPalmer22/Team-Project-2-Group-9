@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1489526636524974694}
   - component: {fileID: 2523149391095840195}
   - component: {fileID: 351544967955630345}
+  - component: {fileID: -377199902926677554}
   m_Layer: 0
   m_Name: wizShelf 1
   m_TagString: Untagged
@@ -87,3 +88,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &-377199902926677554
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2296849249435773148}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.13076161, y: 0.02179562, z: 0.12662512}
+  m_Center: {x: 0.054482874, y: 0.000000021420425, z: 0.06331256}

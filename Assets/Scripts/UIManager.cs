@@ -51,4 +51,12 @@ public class UIManager : MonoBehaviour
 
         onComplete?.Invoke();
     }
+
+    public void QuitGame()
+    {
+        Debug.Log("Exiting the app UIManager");
+        
+        Application.Quit();
+    }
+    
 }

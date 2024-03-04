@@ -48,7 +48,7 @@ public class ButtonStateManager : MonoBehaviour
     public void ExitGame()
     {
         // Debug log "Exiting the app"
-        Debug.Log("Exiting the app");
+        Debug.Log("Exiting the app ButtonManagerState");
 
         // Exit the game
         Application.Quit();

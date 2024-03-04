@@ -9,6 +9,6 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: 1afd7c8425880ca4b99f02aad8c47814
   - enabled: 1
-    path: Assets/Scenes/Nav Mesh Scene.unity
-    guid: 09d9753a6b6b3d0438d430d6bff0841a
+    path: Assets/Scenes/Dimitri Scene.unity
+    guid: 62d0a419eeffba04b9acfc047fd357af
   m_configObjects: {}

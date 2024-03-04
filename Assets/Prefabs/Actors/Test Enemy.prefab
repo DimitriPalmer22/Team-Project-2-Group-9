@@ -291,7 +291,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1347ba096ea31842ac5625676bb7798, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  visionRange: 10
+  visionRange: 25
   _projectilePrefab: {fileID: 5043598522536709173, guid: 87683dd3e1f61eb4198f35b1774b5706, type: 3}
   _firingPoint: {fileID: 1343672895980629999}
   _fireRate: 30
@@ -322,7 +322,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 6
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 720

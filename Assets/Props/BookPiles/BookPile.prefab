@@ -15,7 +15,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1121350545371310580
 Transform:
   m_ObjectHideFlags: 0
@@ -83,7 +83,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1520955493746540512
 Transform:
   m_ObjectHideFlags: 0
@@ -117,7 +117,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5648178277025163718
 Transform:
   m_ObjectHideFlags: 0
@@ -151,7 +151,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6432866379152892085
 Transform:
   m_ObjectHideFlags: 0
@@ -543,6 +543,10 @@ PrefabInstance:
     - target: {fileID: 39578131268480710, guid: 87174ad19f8b7d443b2b1f6aa01c2ce8, type: 3}
       propertyPath: m_Name
       value: stackedBooks
+      objectReference: {fileID: 0}
+    - target: {fileID: 39578131268480710, guid: 87174ad19f8b7d443b2b1f6aa01c2ce8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7352108482082125213, guid: 87174ad19f8b7d443b2b1f6aa01c2ce8, type: 3}
       propertyPath: m_RootOrder
@@ -995,6 +999,10 @@ PrefabInstance:
     - target: {fileID: 5344914429977265648, guid: 19f3ceb37c8f8144aaf504d2aad301ed, type: 3}
       propertyPath: m_Name
       value: shelvedbooksalt
+      objectReference: {fileID: 0}
+    - target: {fileID: 5344914429977265648, guid: 19f3ceb37c8f8144aaf504d2aad301ed, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 19f3ceb37c8f8144aaf504d2aad301ed, type: 3}
@@ -1538,6 +1546,10 @@ PrefabInstance:
     - target: {fileID: 5344914429977265648, guid: 19f3ceb37c8f8144aaf504d2aad301ed, type: 3}
       propertyPath: m_Name
       value: shelvedbooksalt
+      objectReference: {fileID: 0}
+    - target: {fileID: 5344914429977265648, guid: 19f3ceb37c8f8144aaf504d2aad301ed, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 19f3ceb37c8f8144aaf504d2aad301ed, type: 3}

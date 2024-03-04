@@ -47,6 +47,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: blueBook
       objectReference: {fileID: 0}
+    - target: {fileID: 550854789943348042, guid: b7c460b7e8f3f9c438ef29f21c4d694b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 931918773396771312, guid: b7c460b7e8f3f9c438ef29f21c4d694b, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -173,6 +177,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: brownBook
       objectReference: {fileID: 0}
+    - target: {fileID: 7501327456337669949, guid: 86c7092b28df85a4887b0ff4687ef294, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 86c7092b28df85a4887b0ff4687ef294, type: 3}
 --- !u!4 &2450640147932148057 stripped
@@ -247,6 +255,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: greenBook
       objectReference: {fileID: 0}
+    - target: {fileID: 7498727097809177880, guid: a036f4ff56615f149877acf87ea2efbd, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a036f4ff56615f149877acf87ea2efbd, type: 3}
 --- !u!4 &3745659204183907513 stripped
@@ -264,6 +276,10 @@ PrefabInstance:
     - target: {fileID: 4852509290434909713, guid: d078b8f6c420ab645a4f7cb973aa2d23, type: 3}
       propertyPath: m_Name
       value: redBook
+      objectReference: {fileID: 0}
+    - target: {fileID: 4852509290434909713, guid: d078b8f6c420ab645a4f7cb973aa2d23, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5196102639151451307, guid: d078b8f6c420ab645a4f7cb973aa2d23, type: 3}
       propertyPath: m_RootOrder
